@@ -88,9 +88,11 @@ class LoginScreen extends StatelessWidget {
                   const SizedBox(height: 16.0),
                   Container(
                     width: boxWidth,
-                    height: boxHeight, // Use the box height here
+                    height: boxHeight,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/tabs');
+                      },
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(borderRadius),
