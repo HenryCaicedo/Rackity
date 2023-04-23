@@ -9,13 +9,14 @@ void main() {
       expect(prendasFiltradas.length, 3);
     });
 
-    test('debería devolver una prenda de tipo superior, una de tipo inferior y una de tipo calzado', () {
+   test('debería devolver una prenda de tipo superior, una de tipo inferior y una de tipo calzado', () {
       final prendasFiltradas = obtenerPrendasAleatorias(prendas);
       final tipos = prendasFiltradas.map((prenda) => prenda['Tipo']).toList();
       expect(tipos.contains('superior'), true);
       expect(tipos.contains('inferior'), true);
       expect(tipos.contains('calzado'), true);
     });
+
 
     test('debería devolver una sola prenda de tipo superior', () {
      final prendasFiltradas = obtenerPrendasAleatorias(prendas);
@@ -34,6 +35,12 @@ void main() {
       final calzados = prendasFiltradas.where((prenda) => prenda['Tipo'] == 'calzado').toList();
       expect(calzados.length, 1);
     });
+    test('debería devolver verdadero si hay al menos una prenda de cada tipo', () {
+      final prendasFiltradas = obtenerPrendasAleatorias(prendas);
+      final resultado = hayPrendaDeCadaTipo(prendasFiltradas);
+      expect(resultado, true);
+    });
+    
 
   });
 }
@@ -94,5 +101,32 @@ List<Map<String, dynamic>> obtenerPrendasAleatorias(List<Map<String, dynamic>> p
 
   return prendasFiltradas;
 }
+
+bool hayPrendaDeCadaTipo(List<Map<String, dynamic>> prendas) {
+  // Verificar si hay al menos una prenda de cada tipo
+  bool haySuperior = false;
+  bool hayInferior = false;
+  bool hayCalzado = false;
+
+  for (var prenda in prendas) {
+    switch (prenda["Tipo"]) {
+      case "superior":
+        haySuperior = true;
+        break;
+      case "inferior":
+        hayInferior = true;
+        break;
+      case "calzado":
+        hayCalzado = true;
+        break;
+      default:
+        break;
+    }
+  }
+
+  return haySuperior && hayInferior && hayCalzado;
+}
+
+
 
 
