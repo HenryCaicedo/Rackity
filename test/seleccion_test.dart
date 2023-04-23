@@ -5,35 +5,36 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('obtenerPrendasAleatorias', () {
     test('debería devolver una lista con tres prendas', () {
-      final prendas = obtenerPrendasAleatorias();
-      expect(prendas.length, 3);
+      final prendasFiltradas = obtenerPrendasAleatorias(prendas);
+      expect(prendasFiltradas.length, 3);
     });
 
     test('debería devolver una prenda de tipo superior, una de tipo inferior y una de tipo calzado', () {
-      final prendas = obtenerPrendasAleatorias();
-      final tipos = prendas.map((prenda) => prenda['Tipo']).toList();
-      expect(tipos.contains('camisa'), true);
-      expect(tipos.contains('pantalón'), true);
-      expect(tipos.contains('zapatos'), true);
+      final prendasFiltradas = obtenerPrendasAleatorias(prendas);
+      final tipos = prendasFiltradas.map((prenda) => prenda['Tipo']).toList();
+      expect(tipos.contains('superior'), true);
+      expect(tipos.contains('inferior'), true);
+      expect(tipos.contains('calzado'), true);
     });
 
     test('debería devolver una sola prenda de tipo superior', () {
-      final prendas = obtenerPrendasAleatorias();
-      final superiores = prendas.where((prenda) => prenda['Tipo'] == 'camisa').toList();
-      expect(superiores.length, 1);
+     final prendasFiltradas = obtenerPrendasAleatorias(prendas);
+     final superiores = prendasFiltradas.where((prenda) => prenda['Tipo'] == 'superior').toList();
+     expect(superiores.length, 1);
     });
 
     test('debería devolver una sola prenda de tipo inferior', () {
-      final prendas = obtenerPrendasAleatorias();
-      final inferiores = prendas.where((prenda) => prenda['Tipo'] == 'pantalón').toList();
+      final prendasFiltradas = obtenerPrendasAleatorias(prendas);
+      final inferiores = prendasFiltradas.where((prenda) => prenda['Tipo'] == 'inferior').toList();
       expect(inferiores.length, 1);
     });
 
     test('debería devolver una sola prenda de tipo calzado', () {
-      final prendas = obtenerPrendasAleatorias();
-      final calzados = prendas.where((prenda) => prenda['Tipo'] == 'zapatos').toList();
+      final prendasFiltradas = obtenerPrendasAleatorias(prendas);
+      final calzados = prendasFiltradas.where((prenda) => prenda['Tipo'] == 'calzado').toList();
       expect(calzados.length, 1);
     });
+
   });
 }
 
@@ -43,7 +44,7 @@ List<Map<String, dynamic>> prendas = [
     "Idusuario": 1,
     "tokenImagen": "abc123",
     "Color": "azul",
-    "Tipo": "camisa",
+    "Tipo": "superior",
     "Formalidad": "informal",
   },
   {
@@ -51,7 +52,7 @@ List<Map<String, dynamic>> prendas = [
     "Idusuario": 1,
     "tokenImagen": "def456",
     "Color": "rojo",
-    "Tipo": "pantalón",
+    "Tipo": "inferior",
     "Formalidad": "formal",
   },
   {
@@ -59,7 +60,7 @@ List<Map<String, dynamic>> prendas = [
     "Idusuario": 1,
     "tokenImagen": "ghi789",
     "Color": "verde",
-    "Tipo": "zapatos",
+    "Tipo": "calzado",
     "Formalidad": "informal",
   },
   {
@@ -67,27 +68,27 @@ List<Map<String, dynamic>> prendas = [
     "Idusuario": 1,
     "tokenImagen": "jkl012",
     "Color": "negro",
-    "Tipo": "chaqueta",
+    "Tipo": "superior",
     "Formalidad": "formal",
   },
 ];
 
-List<Map<String, dynamic>> obtenerPrendasAleatorias() {
+List<Map<String, dynamic>> obtenerPrendasAleatorias(List<Map<String, dynamic>> prendas) {
   List<Map<String, dynamic>> prendasFiltradas = [];
 
   // Obtener aleatoriamente una prenda de tipo "superior"
   var prendasSuperiores =
-      prendas.where((prenda) => prenda["Tipo"] == "camisa" || prenda["Tipo"] == "chaqueta").toList();
+      prendas.where((prenda) => prenda["Tipo"] == "superior" ).toList();
   var prendaSuperior = prendasSuperiores[Random().nextInt(prendasSuperiores.length)];
   prendasFiltradas.add(prendaSuperior);
 
   // Obtener aleatoriamente una prenda de tipo "inferior"
-  var prendasInferiores = prendas.where((prenda) => prenda["Tipo"] == "pantalón").toList();
+  var prendasInferiores = prendas.where((prenda) => prenda["Tipo"] == "inferior").toList();
   var prendaInferior = prendasInferiores[Random().nextInt(prendasInferiores.length)];
   prendasFiltradas.add(prendaInferior);
 
   // Obtener aleatoriamente una prenda de tipo "calzado"
-  var prendasCalzado = prendas.where((prenda) => prenda["Tipo"] == "zapatos").toList();
+  var prendasCalzado = prendas.where((prenda) => prenda["Tipo"] == "calzado").toList();
   var prendaCalzado = prendasCalzado[Random().nextInt(prendasCalzado.length)];
   prendasFiltradas.add(prendaCalzado);
 
