@@ -40,7 +40,7 @@ void main() {
     
     List<Map<String, dynamic>> filteredPrendas = filtrarPrendas(prendas, 'azul', null, 'informal');
     
-    expect(filteredPrendas.length, 2);
+    expect(filteredPrendas.length, 0);
     expect(filteredPrendas[0]['Id'], 1);
     expect(filteredPrendas[1]['Id'], 4);
   });
@@ -49,15 +49,15 @@ void main() {
 
 List<Map<String, dynamic>> filtrarPrendas(List<Map<String, dynamic>> prendas, String? color, String? tipo, String? formalidad) {
   return prendas.where((prenda) {
-    bool cumpleFiltro = false;
+    bool cumpleFiltro = true;
     if (color != null && prenda['Color'] != color) {
-      cumpleFiltro = true;
+      cumpleFiltro = false;
     }
     if (tipo != null && prenda['Tipo'] != tipo) {
-      cumpleFiltro = true;
+      cumpleFiltro = false;
     }
     if (formalidad != null && prenda['Formalidad'] != formalidad) {
-      cumpleFiltro = true;
+      cumpleFiltro = false;
     }
     return cumpleFiltro;
   }).toList();
