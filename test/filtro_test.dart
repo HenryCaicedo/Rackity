@@ -40,9 +40,12 @@ void main() {
     
     List<Map<String, dynamic>> filteredPrendas = filtrarPrendas(prendas, 'azul', null, 'informal');
     
-    expect(filteredPrendas.length, 0);
+    expect(filteredPrendas.length, 2);
     expect(filteredPrendas[0]['Id'], 1);
     expect(filteredPrendas[1]['Id'], 4);
+
+    List<Map<String, dynamic>> filteredPrendas2 = filtrarPrendas(prendas, 'azul', null, 'formal');
+    expect(filteredPrendas2.length, 0);
   });
 }
 
