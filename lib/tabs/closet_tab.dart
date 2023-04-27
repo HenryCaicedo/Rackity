@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/image_card_widget.dart';
+import '../colors.dart';
 
 class ClosetTab extends StatelessWidget {
   const ClosetTab({Key? key}) : super(key: key);
@@ -12,20 +13,22 @@ class ClosetTab extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.all(16.0),
+              padding: EdgeInsets.only(
+                  left: 16.0, top: 32.0, right: 24.0, bottom: 0),
               alignment: Alignment.centerLeft,
               child: Text(
-                'Mis Prendas',
+                'Mis prendas',
                 style: TextStyle(
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  fontSize: 32.0,
+                  fontWeight: FontWeight.w500,
+                  color: textColor,
                 ),
               ),
             ),
             Expanded(
               child: Container(
                 child: Card(
+                  elevation: 0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(30.0),
@@ -34,11 +37,11 @@ class ClosetTab extends StatelessWidget {
                   ),
                   margin: EdgeInsets.fromLTRB(0.0, 16.0, 0.0, 0.0),
                   child: Padding(
-                    padding: EdgeInsets.all(25.0),
+                    padding: EdgeInsets.fromLTRB(25.0, 25.0, 25.0, 0.0),
                     child: GridView.builder(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                        childAspectRatio: 95 / 100, // 3:4 aspect ratio
+                        childAspectRatio: 95 / 100,
                         mainAxisSpacing: 14.0, // vertical spacing between cards
                         crossAxisSpacing: 20.0, // add space between columns
                       ),
@@ -85,7 +88,7 @@ class ClosetTab extends StatelessWidget {
           // Add your logic for the button here
         },
         child: Icon(Icons.add),
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Theme.of(context).colorScheme.secondary,
         foregroundColor: Colors.white,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
