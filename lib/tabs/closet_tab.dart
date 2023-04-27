@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/image_card_widget.dart';
 
 class ClosetTab extends StatelessWidget {
   const ClosetTab({Key? key}) : super(key: key);
@@ -33,22 +34,20 @@ class ClosetTab extends StatelessWidget {
                   ),
                   margin: EdgeInsets.fromLTRB(0.0, 16.0, 0.0, 0.0),
                   child: Padding(
-                    padding: EdgeInsets.all(16.0),
+                    padding: EdgeInsets.all(25.0),
                     child: GridView.builder(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                        childAspectRatio: MediaQuery.of(context).size.width /
-                            (MediaQuery.of(context).size.height / 3),
+                        childAspectRatio: 95 / 100, // 3:4 aspect ratio
+                        mainAxisSpacing: 14.0, // vertical spacing between cards
+                        crossAxisSpacing: 20.0, // add space between columns
                       ),
                       itemCount: 20,
                       itemBuilder: (BuildContext context, int index) {
-                        return Card(
+                        return RackityCardWidget(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              SizedBox(
-                                height: 8.0,
-                              ),
                               Padding(
                                 padding: EdgeInsets.all(8.0),
                                 child: Text(
@@ -60,16 +59,14 @@ class ClosetTab extends StatelessWidget {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.all(8.0),
+                                padding:
+                                    EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 8.0),
                                 child: Text(
                                   'Photo',
                                   style: TextStyle(
                                     fontSize: 14.0,
                                   ),
                                 ),
-                              ),
-                              SizedBox(
-                                height: 8.0,
                               ),
                             ],
                           ),
@@ -79,7 +76,7 @@ class ClosetTab extends StatelessWidget {
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

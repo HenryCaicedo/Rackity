@@ -14,14 +14,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Rackity',
-      theme: ThemeData(
-        primarySwatch: Colors.green, // Set the primary color to green
+      theme: Theme.of(context).copyWith(
+        colorScheme: Theme.of(context).colorScheme.copyWith(
+              primary: const Color(0xFF63BFAE),
+            ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            elevation: 0, // Set the standard elevation for all elevated buttons
+            elevation: 0,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(
-                  20), // Set the standard border radius for all elevated buttons
+              borderRadius: BorderRadius.circular(20),
             ),
           ),
         ),
