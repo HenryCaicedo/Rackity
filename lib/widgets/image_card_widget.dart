@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class RackityCardWidget extends StatelessWidget {
+class ImageCardWidget extends StatelessWidget {
   final Widget child;
 
-  RackityCardWidget({required this.child});
+  ImageCardWidget({required this.child});
 
   @override
   Widget build(BuildContext context) {

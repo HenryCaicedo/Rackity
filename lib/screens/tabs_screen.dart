@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rackity/colors.dart';
 import '../tabs/closet_tab.dart';
 import '../tabs/generate_tab.dart';
 import '../tabs/outfits_tab.dart';
@@ -32,7 +33,7 @@ class SquareIconButton extends StatelessWidget {
           elevation: 6,
           backgroundColor: Colors.white,
           shadowColor: Colors.black
-              .withOpacity(1), // Set the opacity of the shadow color
+              .withOpacity(0.7), // Set the opacity of the shadow color
         ),
         child: Icon(
           icon,
@@ -73,70 +74,77 @@ class _TabsScreenState extends State<TabsScreen> {
             ),
           ),
           Container(
-            height: 130,
+            color: Color(0xFFF2F2F2),
+            height: 100,
             child: DecoratedBox(
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.bottomCenter,
-                  end: Alignment.topCenter,
-                  colors: [
-                    Color(0xFF63BFAE),
-                    Color.fromRGBO(99, 191, 174, 0),
-                  ],
+                color: navBarColor,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(40.0),
+                  topRight: Radius.circular(40.0),
                 ),
               ),
               child: Container(
-                  alignment: Alignment.bottomCenter,
-                  child: Center(
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                          left: 25, right: 25, top: 10, bottom: 15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SquareIconButton(
-                            onPressed: () {
-                              setState(() {
-                                _selectedIndex = 0;
-                              });
-                            },
-                            icon: Icons.door_back_door,
-                            isSelected: _selectedIndex == 0, // modified
-                          ),
-                          SquareIconButton(
-                            onPressed: () {
-                              setState(() {
-                                _selectedIndex = 1;
-                              });
-                            },
-                            icon: Icons.auto_awesome,
-                            isSelected: _selectedIndex == 1, // modified
-                          ),
-                          SquareIconButton(
-                            onPressed: () {
-                              setState(() {
-                                _selectedIndex = 2;
-                              });
-                            },
-                            icon: Icons.group_work,
-                            isSelected: _selectedIndex == 2, // modified
-                          ),
-                          SquareIconButton(
-                            onPressed: () {
-                              setState(() {
-                                _selectedIndex = 3;
-                              });
-                            },
-                            icon: Icons.person,
-                            isSelected: _selectedIndex == 3, // modified
-                          ),
-                        ],
-                      ),
+                alignment: Alignment.bottomCenter,
+                child: Center(
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      left: 15,
+                      right: 15,
+                      top: 10,
+                      bottom: 15,
                     ),
-                  )),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SquareIconButton(
+                          onPressed: () {
+                            setState(() {
+                              _selectedIndex = 0;
+                            });
+                          },
+                          icon: Icons.door_back_door,
+                          isSelected: _selectedIndex == 0,
+                        ),
+                        SquareIconButton(
+                          onPressed: () {
+                            setState(() {
+                              _selectedIndex = 1;
+                            });
+                          },
+                          icon: Icons.auto_awesome,
+                          isSelected: _selectedIndex == 1,
+                        ),
+                        SquareIconButton(
+                          onPressed: () {},
+                          icon: Icons.camera,
+                        ),
+                        SquareIconButton(
+                          onPressed: () {
+                            setState(() {
+                              _selectedIndex = 2;
+                            });
+                          },
+                          icon: Icons.group_work,
+                          isSelected: _selectedIndex == 2,
+                        ),
+                        SquareIconButton(
+                          onPressed: () {
+                            setState(() {
+                              _selectedIndex = 3;
+                            });
+                          },
+                          icon: Icons.person,
+                          isSelected: _selectedIndex == 3, // modified
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ),
-          ),
+          )
         ],
       ),
     );

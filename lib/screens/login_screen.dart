@@ -59,11 +59,12 @@ class LoginScreen extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     padding: EdgeInsets.only(left: 16.0),
                     child: Text(
-                      'Welcome back',
+                      'Bienvenido',
                       style: TextStyle(
-                        color: textColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 26.0,
+                        color: Color(0xFF61857C),
+                        fontFamily: 'JosefinSans',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 27.0,
                       ),
                     ),
                   ),

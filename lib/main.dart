@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'screens/login_screen.dart';
 import 'screens/tabs_screen.dart';
+import 'widgets/clothes_list_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final customTheme = ThemeData(
+      fontFamily: 'JosefinSans',
       primaryColor: const Color(0xFF63BFAE),
       colorScheme: const ColorScheme.light().copyWith(
         primary: const Color(0xFF63BFAE),
@@ -34,7 +36,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Rackity',
       theme: customTheme,
-      home: const LoginScreen(),
+      home: LoginScreen(),
       routes: {
         '/tabs': (context) => TabsScreen(),
       },
