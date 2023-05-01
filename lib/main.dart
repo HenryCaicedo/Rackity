@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/login_screen.dart';
+import 'screens/signup_screen.dart';
 import 'screens/tabs_screen.dart';
 import 'widgets/clothes_list_widget.dart';
 
@@ -39,6 +40,8 @@ class MyApp extends StatelessWidget {
       home: LoginScreen(),
       routes: {
         '/tabs': (context) => TabsScreen(),
+        '/login': (context) => const LoginScreen(),
+        '/signup': (context) => const SignupScreen(),
       },
     );
   }

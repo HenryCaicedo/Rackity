@@ -7,29 +7,20 @@ class Garment {
   Garment({required this.id, required this.image});
 }
 
-List<Garment> clothes = [
-  Garment(
-    id: 1,
-    image: AssetImage('assets/clothes/garment1.png'),
-  ),
-  Garment(
-    id: 2,
-    image: AssetImage('assets/clothes/garment2.png'),
-  ),
-  Garment(
-    id: 3,
-    image: AssetImage('assets/clothes/garment3.png'),
-  ),
-  Garment(
-    id: 4,
-    image: AssetImage('assets/clothes/garment4.png'),
-  ),
-  Garment(
-    id: 5,
-    image: AssetImage('assets/clothes/garment5.png'),
-  ),
-  Garment(
-    id: 6,
-    image: AssetImage('assets/clothes/garment6.png'),
-  ),
-];
+List<Garment> clothes = createGarmentsList();
+
+List<Garment> createGarmentsList() {
+  List<Garment> clothes = [];
+
+//Aquí se lee cada una de las imagenes y se crean los objetos para para agregarlos a la lista de prendas
+  for (int i = 1; i <= 12; i++) {
+    clothes.add(
+      Garment(
+        id: i,
+        image: AssetImage('assets/clothes/garment$i.png'),
+      ),
+    );
+  }
+
+  return clothes;
+}

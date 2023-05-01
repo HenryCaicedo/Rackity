@@ -6,8 +6,8 @@ double boxWidth = 290.0;
 double borderRadius = 50.0;
 double boxHeight = 48.0; // Define the box height here
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class SignupScreen extends StatelessWidget {
+  const SignupScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,7 @@ class LoginScreen extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     padding: EdgeInsets.only(left: 16.0),
                     child: Text(
-                      'Welcome',
+                      'Create account',
                       style: TextStyle(
                         color: Color(0xFF61857C),
                         fontFamily: 'JosefinSans',
@@ -73,19 +73,12 @@ class LoginScreen extends StatelessWidget {
                   const SizedBox(height: 40.0),
                   CustomTextField(hintText: 'username'),
                   SizedBox(height: 12.0),
-                  CustomTextField(hintText: 'password', obscureText: true),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          'Forgot password?',
-                          style: TextStyle(color: textColor),
-                        ),
-                      ),
-                    ],
-                  ),
+                  CustomTextField(hintText: 'email', obscureText: true),
+                  SizedBox(height: 12.0),
+                  CustomTextField(hintText: 'password'),
+                  SizedBox(height: 12.0),
+                  CustomTextField(
+                      hintText: 'confirm password', obscureText: true),
                   const SizedBox(height: 16.0),
                   Container(
                     width: boxWidth * 0.7,
@@ -95,7 +88,7 @@ class LoginScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(borderRadius),
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/tabs');
+                          Navigator.pushNamed(context, '/login');
                         },
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
@@ -104,7 +97,7 @@ class LoginScreen extends StatelessWidget {
                           backgroundColor:
                               Theme.of(context).colorScheme.secondary,
                         ),
-                        child: const Text('Log in'),
+                        child: const Text('Sign up'),
                       ),
                     ),
                   ),
@@ -112,12 +105,12 @@ class LoginScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text('Don\'t have an account?'),
+                      const Text('Already have an account?'),
                       TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/signup');
+                          Navigator.pushNamed(context, '/login');
                         },
-                        child: const Text('Sign up',
+                        child: const Text('Log in',
                             style: TextStyle(color: textColor)),
                       ),
                     ],

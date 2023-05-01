@@ -64,26 +64,39 @@ class ClosetTab extends StatelessWidget {
                                     onTap: () {
                                       // Add your desired action here
                                     },
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          'Filtrar',
-                                          style: TextStyle(
-                                            fontSize: 24.0,
-                                            fontWeight: FontWeight.w300,
-                                            color: Color(0xFF217269),
-                                          ),
+                                    child: Material(
+                                      child: Ink(
+                                        decoration: BoxDecoration(
+                                          color: Color(0xFFF2F2F2),
                                         ),
-                                        SizedBox(
-                                          width: 25.0,
-                                          child: Icon(
-                                            Icons.keyboard_arrow_right,
-                                            color: Color(0xFF217269),
-                                            size: 35,
-                                          ),
+                                        child: InkWell(
+                                          onTap: () {},
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                'Filtrar',
+                                                style: TextStyle(
+                                                  fontSize: 24.0,
+                                                  fontWeight: FontWeight.w300,
+                                                  color: Color(0xFF217269),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 25.0,
+                                                child: Icon(
+                                                  Icons.keyboard_arrow_right,
+                                                  color: Color(0xFF217269),
+                                                  size: 35,
+                                                ),
+                                              ),
+                                            ],
+                                          ), // other widget
                                         ),
-                                      ],
+                                      ),
                                     ),
+                                    //AQUI
+
+                                    //AQUI
                                   ),
                                 ),
                               )),
