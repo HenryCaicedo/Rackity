@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import '../colors.dart';
+import '../widgets/custom_textfield_widget.dart';
+
+double boxWidth = 290.0;
+double borderRadius = 50.0;
+double boxHeight = 48.0; // Define the box height here
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -8,9 +13,6 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double cardHeight = screenHeight * 0.6;
-    double boxWidth = 290.0;
-    double borderRadius = 50.0;
-    double boxHeight = 48.0; // Define the box height here
 
     return Scaffold(
         body: SafeArea(
@@ -59,7 +61,7 @@ class LoginScreen extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     padding: EdgeInsets.only(left: 16.0),
                     child: Text(
-                      'Bienvenido',
+                      'Welcome',
                       style: TextStyle(
                         color: Color(0xFF61857C),
                         fontFamily: 'JosefinSans',
@@ -69,64 +71,9 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 40.0),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(borderRadius),
-                      color: textFieldColor,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 2,
-                          blurRadius: 5,
-                          offset: Offset(0, 3), // changes position of shadow
-                        ),
-                      ],
-                    ),
-                    width: boxWidth,
-                    height: boxHeight, // Use the box height here
-                    child: const TextField(
-                      decoration: InputDecoration(
-                        hintText: 'username',
-                        hintStyle: TextStyle(
-                          color: textColor,
-                          fontWeight: FontWeight.w500,
-                        ),
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 16.0, vertical: 14.0),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 16.0),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(borderRadius),
-                      color: textFieldColor,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 2,
-                          blurRadius: 5,
-                          offset: Offset(0, 3), // changes position of shadow
-                        ),
-                      ],
-                    ),
-                    width: boxWidth,
-                    height: boxHeight, // Use the box height here
-                    child: const TextField(
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        hintText: 'password',
-                        hintStyle: TextStyle(
-                          color: textColor,
-                          fontWeight: FontWeight.w500,
-                        ),
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 16.0, vertical: 14.0),
-                      ),
-                    ),
-                  ),
+                  CustomTextField(hintText: 'username'),
+                  SizedBox(height: 16.0),
+                  CustomTextField(hintText: 'password', obscureText: true),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
