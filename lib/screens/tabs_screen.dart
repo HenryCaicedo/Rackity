@@ -74,16 +74,17 @@ class _TabsScreenState extends State<TabsScreen> {
             ),
           ),
           Container(
-            color: Color(0xFFF2F2F2),
+            color: _selectedIndex == 1 ? Color(0xFFBCDED6) : Color(0xFFF2F2F2),
             height: 100,
             child: DecoratedBox(
               decoration: BoxDecoration(
-                color: navBarColor,
+                color: _selectedIndex == 1 ? Color(0xFF7ABDAE) : navBarColor,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(40.0),
                   topRight: Radius.circular(40.0),
                 ),
               ),
+              //This is the appbar
               child: Container(
                 alignment: Alignment.bottomCenter,
                 child: Center(
