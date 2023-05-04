@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:rackity/widgets/clothes_list_widget.dart';
-import '../widgets/image_card_widget.dart';
 import '../colors.dart';
 
 class ClosetTab extends StatelessWidget {
