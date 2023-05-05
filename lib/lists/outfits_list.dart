@@ -18,9 +18,18 @@ List<Outfit> createOutfitsList() {
   for (int i = 1; i <= 5; i++) {
     outfits.add(
       Outfit(
-        top: clothes[0],
-        bottom: clothes[0],
-        shoes: clothes[0],
+        top: clothes[3 * i - 3],
+        bottom: clothes[3 * i - 2],
+        shoes: clothes[3 * i - 1],
+      ),
+    );
+  }
+  for (int i = 1; i <= 5; i++) {
+    outfits.add(
+      Outfit(
+        top: clothes[3 * i - 3],
+        bottom: clothes[3 * i - 2],
+        shoes: clothes[3 * i - 1],
       ),
     );
   }

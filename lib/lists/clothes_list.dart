@@ -13,7 +13,7 @@ List<Garment> createGarmentsList() {
   List<Garment> clothes = [];
 
 //Aquí se lee cada una de las imagenes y se crean los objetos para para agregarlos a la lista de prendas
-  for (int i = 1; i <= 15; i++) {
+  for (int i = 1; i <= 16; i++) {
     clothes.add(
       Garment(
         id: i,

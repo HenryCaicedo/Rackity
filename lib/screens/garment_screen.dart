@@ -52,8 +52,11 @@ class GarmentScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: Image(
-                    image: garment.image,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: Image(
+                      image: garment.image,
+                    ),
                   ),
                 ),
               ),

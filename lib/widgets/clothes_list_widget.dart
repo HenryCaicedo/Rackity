@@ -40,8 +40,11 @@ class ClothesListWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: Image(
-                    image: clothes[index].image,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: Image(
+                      image: clothes[index].image,
+                    ),
                   ),
                 ),
               );
