@@ -9,12 +9,14 @@ class Outfit {
   Outfit({required this.top, required this.bottom, required this.shoes});
 }
 
+//Esta es la lista que se muestra en la app
 List<Outfit> outfits = createOutfitsList();
 
 List<Outfit> createOutfitsList() {
   List<Outfit> outfits = [];
 
-//Aquí se lee cada una de las imagenes y se crean los objetos para para agregarlos a la lista de prendas
+//Aquí se llena la lista de outfits. Los outfits se forman a partir de la lista de prendas en clothes_lists.dart
+//Esto sólo lo hice con el fin de llenar la UI y hacer pruebas, pero todo esto debe hacerse desde la base de datos
   for (int i = 1; i <= 5; i++) {
     outfits.add(
       Outfit(

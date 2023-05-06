@@ -3,6 +3,7 @@ import 'package:rackity/lists/outfits_list.dart';
 import 'dart:math';
 import '../lists/clothes_list.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import '../screens/outfit_screen.dart';
 
 class OutfitsListWidget extends StatelessWidget {
   const OutfitsListWidget({Key? key}) : super(key: key);
@@ -124,12 +125,12 @@ class OutfitsListWidget extends StatelessWidget {
               Outfit outfit = outfits[index];
               return GestureDetector(
                 onTap: () {
-                  /*  Navigator.push(
+                  Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => GarmentScreen(garment: garment),
+                      builder: (context) => OutfitScreen(outfit: outfit),
                     ),
-                  );*/
+                  );
                 },
                 child: Container(child: clothesGroup(outfit)),
               );
