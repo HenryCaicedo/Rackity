@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import '../colors.dart';
 import '../widgets/custom_textfield_widget.dart';
+import '../auth_service.dart' as auth;
 
 double boxWidth = 290.0;
 double borderRadius = 50.0;
 double boxHeight = 48.0; // Define the box height here
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  LoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -94,8 +95,8 @@ class LoginScreen extends StatelessWidget {
                       elevation: 5, // Set the elevation for the shadow
                       borderRadius: BorderRadius.circular(borderRadius),
                       child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/tabs');
+                        onPressed: () async {
+                          await auth.AuthService.signInWithGoogle(context);
                         },
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
