@@ -96,7 +96,8 @@ class LoginScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(borderRadius),
                       child: ElevatedButton(
                         onPressed: () async {
-                          await auth.AuthService.signInWithGoogle(context);
+                          // await auth.AuthService.signInWithGoogle(context);
+                          Navigator.pushNamed(context, '/tabs');
                         },
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
