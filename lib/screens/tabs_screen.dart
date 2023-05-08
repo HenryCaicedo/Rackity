@@ -4,18 +4,19 @@ import '../tabs/closet_tab.dart';
 import '../tabs/generate_tab.dart';
 import '../tabs/outfits_tab.dart';
 import '../tabs/profile_tab.dart';
+import '../tabs/camera_tab.dart';
 
 class SquareIconButton extends StatelessWidget {
   final IconData icon;
   final VoidCallback onPressed;
   final bool isSelected; // new
 
-  const SquareIconButton(
-      {Key? key,
-      required this.icon,
-      required this.onPressed,
-      this.isSelected = false})
-      : super(key: key);
+  const SquareIconButton({
+    Key? key,
+    required this.icon,
+    required this.onPressed,
+    this.isSelected = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,13 +33,12 @@ class SquareIconButton extends StatelessWidget {
           ),
           elevation: 6,
           backgroundColor: Colors.white,
-          shadowColor: Colors.black
-              .withOpacity(0.7), // Set the opacity of the shadow color
+          shadowColor: Colors.black.withOpacity(0.7),
         ),
         child: Icon(
           icon,
           size: 32,
-          color: isSelected ? Color(0xFFF2A444) : Color(0xFF63BFAE), // modified
+          color: isSelected ? Color(0xFFF2A444) : Color(0xFF63BFAE),
         ),
       ),
     );
@@ -58,6 +58,7 @@ class _TabsScreenState extends State<TabsScreen> {
   final List<Widget> _tabs = [
     ClosetTab(),
     GenerateTab(),
+    CameraTab(), // new
     OutfitsTab(),
     ProfileTab(),
   ];
@@ -118,16 +119,12 @@ class _TabsScreenState extends State<TabsScreen> {
                           isSelected: _selectedIndex == 1,
                         ),
                         SquareIconButton(
-                          onPressed: () {},
-                          icon: Icons.camera,
-                        ),
-                        SquareIconButton(
                           onPressed: () {
                             setState(() {
                               _selectedIndex = 2;
                             });
                           },
-                          icon: Icons.group_work,
+                          icon: Icons.camera,
                           isSelected: _selectedIndex == 2,
                         ),
                         SquareIconButton(
@@ -136,8 +133,17 @@ class _TabsScreenState extends State<TabsScreen> {
                               _selectedIndex = 3;
                             });
                           },
+                          icon: Icons.group_work,
+                          isSelected: _selectedIndex == 3,
+                        ),
+                        SquareIconButton(
+                          onPressed: () {
+                            setState(() {
+                              _selectedIndex = 4;
+                            });
+                          },
                           icon: Icons.person,
-                          isSelected: _selectedIndex == 3, // modified
+                          isSelected: _selectedIndex == 4,
                         ),
                       ],
                     ),
