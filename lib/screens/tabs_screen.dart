@@ -10,7 +10,6 @@ class SquareIconButton extends StatelessWidget {
   final IconData icon;
   final VoidCallback onPressed;
   final bool isSelected; // new
-
   const SquareIconButton({
     Key? key,
     required this.icon,
