@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import '../colors.dart';
+import '../data/database.dart';
 import '../widgets/custom_textfield_widget.dart';
 import '../auth_service.dart' as auth;
+import 'package:shared_preferences/shared_preferences.dart';
 
 double boxWidth = 290.0;
 double borderRadius = 50.0;
@@ -9,6 +11,8 @@ double boxHeight = 48.0; // Define the box height here
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -72,9 +76,16 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 40.0),
-                  CustomTextField(hintText: 'username'),
+                  CustomTextField(
+                    controller: usernameController,
+                    hintText: 'username',
+                  ),
                   SizedBox(height: 12.0),
-                  CustomTextField(hintText: 'password', obscureText: true),
+                  CustomTextField(
+                    controller: passwordController,
+                    hintText: 'password',
+                    obscureText: true,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -97,7 +108,8 @@ class LoginScreen extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: () async {
                           // await auth.AuthService.signInWithGoogle(context);
-                          Navigator.pushNamed(context, '/tabs');
+                          logIn(usernameController.text,
+                              passwordController.text, context);
                         },
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
@@ -131,5 +143,22 @@ class LoginScreen extends StatelessWidget {
         ],
       ),
     ));
+  }
+
+  Future<void> guardarIdUsuario(int idUsuario) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('idUsuario', idUsuario);
+  }
+
+  void logIn(String username, String password, BuildContext context) async {
+    bool isExistingUser =
+        await DatabaseHelper.instance.usuarioExist(username, password);
+    if (isExistingUser) {
+      guardarIdUsuario(
+          await DatabaseHelper.instance.getIdUsuario(username, password));
+      Navigator.pushNamed(context, '/tabs');
+    } else {
+      //mensaje de incorrecto
+    }
   }
 }

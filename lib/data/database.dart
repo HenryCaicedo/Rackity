@@ -43,9 +43,7 @@ class DatabaseHelper {
         id INTEGER PRIMARY KEY,
         idUsuario INTEGER,
         tokenImagen TEXT,
-        color TEXT,
         tipo TEXT,
-        formalidad TEXT,
         FOREIGN KEY (idUsuario) REFERENCES usuarios(id)
       )
     ''');
@@ -76,16 +74,14 @@ class DatabaseHelper {
     });
   }
 
-  Future<int> createPrenda(int idUsuario, String tokenImagen, String color,
-      String tipo, String formalidad) async {
+  Future<int> createPrenda(
+      int idUsuario, String tokenImagen, String tipo) async {
     final db = await instance.database;
 
     return await db.insert('prendas', {
       'idUsuario': idUsuario,
       'tokenImagen': tokenImagen,
-      'color': color,
       'tipo': tipo,
-      'formalidad': formalidad,
     });
   }
 
@@ -123,5 +119,24 @@ class DatabaseHelper {
         where: 'cuenta = ? AND password = ?', whereArgs: [cuenta, password]);
 
     return result.isNotEmpty;
+  }
+
+  Future<int> getIdUsuario(String cuenta, String password) async {
+    final db = await instance.database;
+    final result = await db.query('usuarios',
+        columns: ['id'],
+        where: 'cuenta = ? AND password = ?',
+        whereArgs: [cuenta, password]);
+    return result.first['id'] as int;
+  }
+
+  Future<List<String>> getTokensDeImagen(int idUsuario) async {
+    final db = await instance.database;
+    final result = await db.query('prendas',
+        where: 'idUsuario = ?',
+        whereArgs: [idUsuario],
+        columns: ['tokenImagen']);
+
+    return result.map((row) => row['tokenImagen'] as String).toList();
   }
 }

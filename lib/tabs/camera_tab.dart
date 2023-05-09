@@ -2,6 +2,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:math';
+
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../data/database.dart';
 
 class CameraTab extends StatefulWidget {
   @override
@@ -11,6 +17,30 @@ class CameraTab extends StatefulWidget {
 class _CameraTabState extends State<CameraTab> {
   late File _image;
   bool init = false;
+
+  Future<int?> obtenerIdUsuario() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getInt('idUsuario');
+  }
+
+  void saveImageToStorage(File imageFile, BuildContext context) async {
+    final directory = await getExternalStorageDirectory();
+    final imageName =
+        'image_${DateTime.now().millisecondsSinceEpoch}_${Random().nextInt(1000)}.jpg';
+    final imagePath = '${directory!.path}/my_images/$imageName';
+
+    if (!await Directory('${directory.path}/my_images').exists()) {
+      await Directory('${directory.path}/my_images').create(recursive: true);
+    }
+
+    await imageFile.copy(imagePath);
+    int? idUsuario = await obtenerIdUsuario();
+    print("---------------------id de usuario:" + idUsuario.toString());
+    await DatabaseHelper.instance.createPrenda(idUsuario!, imagePath, "tipo");
+
+    print("----------------path:" + imagePath.toString());
+    //navegacion a closet
+  }
 
   Future<void> _takePicture() async {
     final ImagePicker picker = ImagePicker();
@@ -37,14 +67,33 @@ class _CameraTabState extends State<CameraTab> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  _takePicture();
-                });
-                // Código a ejecutar cuando se presione el botón
-              },
-              child: Text('Botón'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        _takePicture();
+                      });
+                    },
+                    child: Text('Foto'),
+                  ),
+                ),
+                SizedBox(width: 16), // Espacio entre botones
+                Expanded(
+                  flex: 1,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (init) {
+                        saveImageToStorage(_image, context);
+                      }
+                    },
+                    child: Text('Aceptar'),
+                  ),
+                ),
+              ],
             ),
             init ? Image.file(_image) : Container(),
           ],

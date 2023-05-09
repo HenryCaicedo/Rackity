@@ -8,9 +8,11 @@ double boxHeight = 48.0; // Define the box height here
 class CustomTextField extends StatelessWidget {
   final String hintText;
   final bool obscureText;
+  final TextEditingController? controller;
 
   const CustomTextField({
     Key? key,
+    this.controller,
     required this.hintText,
     this.obscureText = false,
   }) : super(key: key);
@@ -33,6 +35,7 @@ class CustomTextField extends StatelessWidget {
       width: boxWidth,
       height: boxHeight, // Use the box height here
       child: TextField(
+        controller: controller,
         obscureText: obscureText,
         decoration: InputDecoration(
           hintText: hintText,

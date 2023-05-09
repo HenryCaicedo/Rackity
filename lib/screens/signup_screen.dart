@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../colors.dart';
+import '../data/database.dart';
 import '../widgets/custom_textfield_widget.dart';
 
 double boxWidth = 290.0;
@@ -7,7 +8,18 @@ double borderRadius = 50.0;
 double boxHeight = 48.0; // Define the box height here
 
 class SignupScreen extends StatelessWidget {
-  const SignupScreen({Key? key}) : super(key: key);
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+  SignupScreen({Key? key}) : super(key: key);
+  @override
+  void dispose() {
+    usernameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,14 +83,25 @@ class SignupScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 40.0),
-                  CustomTextField(hintText: 'username'),
-                  SizedBox(height: 12.0),
-                  CustomTextField(hintText: 'email', obscureText: true),
-                  SizedBox(height: 12.0),
-                  CustomTextField(hintText: 'password'),
+                  CustomTextField(
+                    controller: usernameController,
+                    hintText: 'username',
+                  ),
                   SizedBox(height: 12.0),
                   CustomTextField(
-                      hintText: 'confirm password', obscureText: true),
+                      controller: emailController, hintText: 'email'),
+                  SizedBox(height: 12.0),
+                  CustomTextField(
+                    controller: passwordController,
+                    hintText: 'password',
+                    obscureText: true,
+                  ),
+                  SizedBox(height: 12.0),
+                  CustomTextField(
+                    controller: confirmPasswordController,
+                    hintText: 'confirm password',
+                    obscureText: true,
+                  ),
                   const SizedBox(height: 16.0),
                   Container(
                     width: boxWidth * 0.7,
@@ -88,6 +111,9 @@ class SignupScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(borderRadius),
                       child: ElevatedButton(
                         onPressed: () {
+                          signUp(usernameController.text,
+                              passwordController.text, emailController.text);
+
                           Navigator.pushNamed(context, '/login');
                         },
                         style: ElevatedButton.styleFrom(
@@ -122,5 +148,15 @@ class SignupScreen extends StatelessWidget {
         ],
       ),
     ));
+  }
+
+  void signUp(String username, String password, String email) async {
+    bool isExistingUser =
+        await DatabaseHelper.instance.usuarioExist(username, password);
+    if (isExistingUser) {
+      //mensaje de ya existe
+    } else {
+      await DatabaseHelper.instance.createUsuario(username, password, email);
+    }
   }
 }

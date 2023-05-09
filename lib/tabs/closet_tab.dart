@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:rackity/widgets/clothes_list_widget.dart';
 import '../colors.dart';
+import '../lists/clothes_list.dart';
 
-class ClosetTab extends StatelessWidget {
+class ClosetTab extends StatefulWidget {
   const ClosetTab({Key? key}) : super(key: key);
+
+  @override
+  State<ClosetTab> createState() => _ClosetTabState();
+}
+
+class _ClosetTabState extends State<ClosetTab> {
+  @override
+  void initState() {
+    createClothes();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -107,5 +119,12 @@ class ClosetTab extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void createClothes() async {
+    clothes = await createGarmentsList();
+    setState(() {
+      clothes;
+    });
   }
 }
