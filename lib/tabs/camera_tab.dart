@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import '../screens/form_screen.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:math';
 
@@ -67,7 +68,8 @@ class _CameraTabState extends State<CameraTab> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Row(
+            Center(
+                child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
@@ -78,7 +80,7 @@ class _CameraTabState extends State<CameraTab> {
                         _takePicture();
                       });
                     },
-                    child: Text('Foto'),
+                    child: Text('Botón 1'),
                   ),
                 ),
                 SizedBox(width: 16), // Espacio entre botones
@@ -90,11 +92,11 @@ class _CameraTabState extends State<CameraTab> {
                         saveImageToStorage(_image, context);
                       }
                     },
-                    child: Text('Aceptar'),
+                    child: Text('Botón 2'),
                   ),
                 ),
               ],
-            ),
+            )),
             init ? Image.file(_image) : Container(),
           ],
         ),
