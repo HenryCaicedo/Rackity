@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import '../screens/form_screen.dart';
 
 class CameraTab extends StatefulWidget {
   @override
@@ -37,14 +38,32 @@ class _CameraTabState extends State<CameraTab> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  _takePicture();
-                });
-                // Código a ejecutar cuando se presione el botón
-              },
-              child: Text('Botón'),
+            Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        _takePicture();
+                      });
+                      // Código a ejecutar cuando se presione el botón
+                    },
+                    child: Text('Botón'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => FormScreen(),
+                        ),
+                      );
+                    },
+                    child: Text('Aceptar'),
+                  ),
+                ],
+              ),
             ),
             init ? Image.file(_image) : Container(),
           ],
