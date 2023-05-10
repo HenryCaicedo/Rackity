@@ -10,7 +10,7 @@ class Outfit {
 }
 
 //Esta es la lista que se muestra en la app
-List<Outfit> outfits = createOutfitsList();
+List<Outfit> outfits = [];
 
 List<Outfit> createOutfitsList() {
   List<Outfit> outfits = [];

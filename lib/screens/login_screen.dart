@@ -90,7 +90,9 @@ class LoginScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          await auth.AuthService.signInWithGoogle(context);
+                        },
                         child: const Text(
                           'Forgot password?',
                           style: TextStyle(color: textColor),

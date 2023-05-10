@@ -80,7 +80,7 @@ class _CameraTabState extends State<CameraTab> {
                         _takePicture();
                       });
                     },
-                    child: Text('Botón 1'),
+                    child: Text('Tomar Foto'),
                   ),
                 ),
                 SizedBox(width: 16), // Espacio entre botones
@@ -90,9 +90,12 @@ class _CameraTabState extends State<CameraTab> {
                     onPressed: () {
                       if (init) {
                         saveImageToStorage(_image, context);
+                        setState(() {
+                          init = false;
+                        });
                       }
                     },
-                    child: Text('Botón 2'),
+                    child: Text('Guardar Foto'),
                   ),
                 ),
               ],
