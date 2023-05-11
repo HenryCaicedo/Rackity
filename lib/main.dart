@@ -1,14 +1,19 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'firebase_options.dart';
 import 'screens/login_screen.dart';
 import 'screens/signup_screen.dart';
 import 'screens/tabs_screen.dart';
 import 'widgets/clothes_list_widget.dart';
 import 'screens/form_screen.dart';
+import 'package:get/get.dart';
+import 'package:rackity/controller_bindings.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -37,7 +42,8 @@ class MyApp extends StatelessWidget {
       ),
     );
 
-    return MaterialApp(
+    return GetMaterialApp(
+      initialBinding: ControllerBindings(),
       debugShowCheckedModeBanner: false,
       title: 'Rackity',
       theme: customTheme,

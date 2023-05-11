@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import '../controller/image_controller.dart';
 import '../screens/form_screen.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:math';
@@ -10,14 +12,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../data/database.dart';
 
+
 class CameraTab extends StatefulWidget {
   @override
   State<CameraTab> createState() => _CameraTabState();
 }
 
+
+
 class _CameraTabState extends State<CameraTab> {
   late File _image;
   bool init = false;
+  final imagesController = Get.find<ImagesController>();
 
   Future<int?> obtenerIdUsuario() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -39,6 +45,7 @@ class _CameraTabState extends State<CameraTab> {
     print("---------------------id de usuario:" + idUsuario.toString());
     await DatabaseHelper.instance.createPrenda(idUsuario!, imagePath, "tipo");
 
+    imagesController.uploadImage(imageFile,"2");
     print("----------------path:" + imagePath.toString());
     //navegacion a closet
   }
@@ -54,6 +61,8 @@ class _CameraTabState extends State<CameraTab> {
       }
     });
   }
+
+
 
   @override
   void initState() {
