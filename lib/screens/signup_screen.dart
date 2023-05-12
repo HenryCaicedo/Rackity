@@ -152,7 +152,7 @@ class SignupScreen extends StatelessWidget {
   }
 
   void signUp(String username, String password, String email) async {
-    await auth.AuthService.signUp(email, password);
+    await auth.AuthService.signUp(email, password, username);
     //   bool isExistingUser =
     //       await DatabaseHelper.instance.usuarioExist(username, password);
     //   if (isExistingUser) {

@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../screens/form_screen.dart';
@@ -7,6 +9,7 @@ import 'dart:math';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../data/database.dart';
 import '../colors.dart';
+import '../auth_service.dart' as auth;
 
 class CameraTab extends StatefulWidget {
   @override
@@ -110,6 +113,7 @@ class _CameraTabState extends State<CameraTab> {
                             onPressed: () {
                               if (init) {
                                 saveImageToStorage(_image, context);
+                                upPhoto();
                                 setState(() {
                                   init = false;
                                 });
@@ -237,6 +241,51 @@ class _CameraTabState extends State<CameraTab> {
       ),
     );
   }
+
+  void upPhoto() async {
+    var idUsuario = auth.AuthService.getidUser();
+    var tipo = _FormScreenState._selectedGarmentType;
+    var lTipos = _FormScreenState._selectedTags;
+    var fecha = DateTime(2000, 12, 31, 0, 0);
+    const usos = 0;
+    String photoUrl = await uploadPhotoToStorage(_image);
+    if (photoUrl != null) {
+      await auth.AuthService.createPrendaDocument(
+          idUsuario, photoUrl, tipo, lTipos, fecha, usos);
+    } else {
+      // Ocurrió un error al subir la foto al almacenamiento
+    }
+  }
+
+  Future<void> addPhotoToCollection(String photoUrl) async {
+    try {
+      final CollectionReference photosCollection =
+          FirebaseFirestore.instance.collection('photos');
+      await photosCollection.add({
+        'url': photoUrl,
+        // Otros campos de datos relacionados con la foto
+      });
+    } catch (e) {
+      print('Error adding photo to collection: $e');
+    }
+  }
+
+  Future<String> uploadPhotoToStorage(File file) async {
+    try {
+      final name =
+          'image_${DateTime.now().millisecondsSinceEpoch}_${Random().nextInt(1000)}.jpg';
+      final Reference storageReference =
+          FirebaseStorage.instance.ref().child("photos").child(name);
+      final TaskSnapshot snapshot = await storageReference.putFile(file);
+
+      // Obtiene la URL de descarga de la foto
+      final String downloadUrl = await snapshot.ref.getDownloadURL();
+      return 'photos/$name';
+    } catch (e) {
+      print('Error uploading photo: $e');
+      return "null";
+    }
+  }
 }
 
 //Formulario
@@ -246,7 +295,7 @@ class FormScreen extends StatefulWidget {
 }
 
 class _FormScreenState extends State<FormScreen> {
-  String _selectedGarmentType = 'Top';
+  static String _selectedGarmentType = 'Top';
 
   List<String> _garmentTypes = [
     'Top',
@@ -264,7 +313,13 @@ class _FormScreenState extends State<FormScreen> {
     "Swimwear"
   ];
 
-  List<String> _selectedTags = [];
+  static List<String> _selectedTags = [];
+  @override
+  void initState() {
+    _selectedTags = [];
+    _selectedGarmentType = 'Top';
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

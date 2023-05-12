@@ -1,32 +1,41 @@
 import 'package:flutter/material.dart';
 import '../colors.dart';
 import '../screens/filtered_clothes_list.dart';
+import '../tabs/closet_tab.dart' as clo;
 
 class FilterWidget extends StatefulWidget {
   @override
-  _FilterWidgetState createState() => _FilterWidgetState();
+  FilterWidgetState createState() => FilterWidgetState();
 }
 
-class _FilterWidgetState extends State<FilterWidget> {
-  String _selectedGarmentType = 'Top';
+class FilterWidgetState extends State<FilterWidget> {
+  static String selectedGarmentType = 'Top';
 
-  List<String> _garmentTypes = [
+  List<String> garmentTypes = [
     'Top',
     'Bottom',
     'Footwear',
   ];
 
-  List<String> _garmentTags = [
+  List<String> garmentTags = [
     "Dresses",
     "Outerwear",
     "Activewear",
     "Casual",
     "Formal",
     "Accessories",
-    "Swimwear"
+    "Swimwear",
+    'Top',
+    'Bottom',
+    'Footwear',
   ];
-
-  List<String> _selectedTags = [];
+  static bool filter = false;
+  static List<String> selectedTags = [];
+  @override
+  void initState() {
+    selectedTags = [];
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,16 +68,16 @@ class _FilterWidgetState extends State<FilterWidget> {
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: _garmentTypes
+                      children: garmentTypes
                           .map(
                             (type) => Row(
                               children: [
                                 Radio(
                                   value: type,
-                                  groupValue: _selectedGarmentType,
+                                  groupValue: selectedGarmentType,
                                   onChanged: (value) {
                                     setState(() {
-                                      _selectedGarmentType = value!;
+                                      selectedGarmentType = value!;
                                     });
                                   },
                                 ),
@@ -81,17 +90,17 @@ class _FilterWidgetState extends State<FilterWidget> {
                     Wrap(
                       spacing: 2,
                       runSpacing: 0,
-                      children: _garmentTags
+                      children: garmentTags
                           .map(
                             (tag) => ChoiceChip(
                               label: Text(tag),
-                              selected: _selectedTags.contains(tag),
+                              selected: selectedTags.contains(tag),
                               onSelected: (selected) {
                                 setState(() {
                                   if (selected) {
-                                    _selectedTags.add(tag);
+                                    selectedTags.add(tag);
                                   } else {
-                                    _selectedTags.remove(tag);
+                                    selectedTags.remove(tag);
                                   }
                                 });
                               },
@@ -115,12 +124,10 @@ class _FilterWidgetState extends State<FilterWidget> {
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => FilteredClothesList(),
-                              ),
-                            );
+                            Navigator.pop(context);
+                            setState(() {
+                              filter = true;
+                            });
                           },
                           child: Text('Apply'),
                         ),

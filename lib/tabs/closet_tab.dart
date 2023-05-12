@@ -4,18 +4,20 @@ import '../colors.dart';
 import '../lists/clothes_list.dart';
 import '../widgets/filter_widget.dart';
 import '../screens/login_screen.dart';
+import '../widgets/filter_widget.dart' as fil;
 
 class ClosetTab extends StatefulWidget {
   const ClosetTab({Key? key}) : super(key: key);
 
   @override
-  State<ClosetTab> createState() => _ClosetTabState();
+  State<ClosetTab> createState() => ClosetTabState();
 }
 
-class _ClosetTabState extends State<ClosetTab> {
+class ClosetTabState extends State<ClosetTab> {
   @override
   void initState() {
     createClothes();
+    // fil.FilterWidgetState.filter = false;
     super.initState();
   }
 
