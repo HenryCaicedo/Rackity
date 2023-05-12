@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../colors.dart';
 import '../data/database.dart';
 import '../widgets/custom_textfield_widget.dart';
+import '../auth_service.dart' as auth;
 
 double boxWidth = 290.0;
 double borderRadius = 50.0;
@@ -151,12 +152,13 @@ class SignupScreen extends StatelessWidget {
   }
 
   void signUp(String username, String password, String email) async {
-    bool isExistingUser =
-        await DatabaseHelper.instance.usuarioExist(username, password);
-    if (isExistingUser) {
-      //mensaje de ya existe
-    } else {
-      await DatabaseHelper.instance.createUsuario(username, password, email);
-    }
+    await auth.AuthService.signUp(email, password);
+    //   bool isExistingUser =
+    //       await DatabaseHelper.instance.usuarioExist(username, password);
+    //   if (isExistingUser) {
+    //     //mensaje de ya existe
+    //   } else {
+    //     await DatabaseHelper.instance.createUsuario(username, password, email);
+    //   }
   }
 }

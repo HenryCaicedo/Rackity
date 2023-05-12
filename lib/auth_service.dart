@@ -6,6 +6,36 @@ class AuthService {
   static final FirebaseAuth _auth = FirebaseAuth.instance;
   static final GoogleSignIn _googleSignIn = GoogleSignIn();
 
+  static Future<UserCredential?> signUp(String email, String password) async {
+    try {
+      final UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return userCredential;
+    } catch (e) {
+      print('Error signing up: $e');
+      return null;
+    }
+  }
+
+  static Future<UserCredential?> signIn(
+      String email, String password, context) async {
+    try {
+      final UserCredential userCredential =
+          await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      Navigator.pushNamed(context, '/tabs');
+      return userCredential;
+    } catch (e) {
+      print('Error signing in: $e');
+      return null;
+    }
+  }
+
   static Future<UserCredential?> signInWithGoogle(context) async {
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
@@ -26,8 +56,6 @@ class AuthService {
       return null;
     }
   }
-
-  // Puedes agregar métodos adicionales de inicio de sesión aquí, como signInWithEmailPassword().
 
   static Future<void> signOut() async {
     await _auth.signOut();

@@ -91,7 +91,8 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       TextButton(
                         onPressed: () async {
-                          await auth.AuthService.signInWithGoogle(context);
+                          await auth.AuthService.signIn(usernameController.text,
+                              passwordController.text, context);
                         },
                         child: const Text(
                           'Forgot password?',
@@ -130,7 +131,7 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       const Text('Don\'t have an account?'),
                       TextButton(
-                        onPressed: () {
+                        onPressed: () async {
                           Navigator.pushNamed(context, '/signup');
                         },
                         child: const Text('Sign up',

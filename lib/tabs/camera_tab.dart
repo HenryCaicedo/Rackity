@@ -1,10 +1,12 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../screens/form_screen.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:math';
+import 'package:firebase_storage/firebase_storage.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -22,6 +24,23 @@ class _CameraTabState extends State<CameraTab> {
   Future<int?> obtenerIdUsuario() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getInt('idUsuario');
+  }
+
+  Future<String> uploadPhotoToStorage(File file) async {
+    try {
+      final name =
+          'image_${DateTime.now().millisecondsSinceEpoch}_${Random().nextInt(1000)}.jpg';
+      final Reference storageReference =
+          FirebaseStorage.instance.ref().child('photos').child(name);
+      final TaskSnapshot snapshot = await storageReference.putFile(file);
+
+      // Obtiene la URL de descarga de la foto
+      final String downloadUrl = await snapshot.ref.getDownloadURL();
+      return downloadUrl;
+    } catch (e) {
+      print('Error uploading photo: $e');
+      return "error";
+    }
   }
 
   void saveImageToStorage(File imageFile, BuildContext context) async {
@@ -53,6 +72,19 @@ class _CameraTabState extends State<CameraTab> {
         // trabajar con la imagen
       }
     });
+  }
+
+  Future<void> addPhotoToCollection(String photoUrl) async {
+    try {
+      final CollectionReference photosCollection =
+          FirebaseFirestore.instance.collection('photos');
+      await photosCollection.add({
+        'url': photoUrl,
+        // Otros campos de datos relacionados con la foto
+      });
+    } catch (e) {
+      print('Error adding photo to collection: $e');
+    }
   }
 
   @override
@@ -90,6 +122,7 @@ class _CameraTabState extends State<CameraTab> {
                     onPressed: () {
                       if (init) {
                         saveImageToStorage(_image, context);
+                        upPhoto();
                         setState(() {
                           init = false;
                         });
@@ -105,5 +138,14 @@ class _CameraTabState extends State<CameraTab> {
         ),
       ),
     );
+  }
+
+  void upPhoto() async {
+    String photoUrl = await uploadPhotoToStorage(_image);
+    if (photoUrl != null) {
+      await addPhotoToCollection(photoUrl);
+    } else {
+      // Ocurrió un error al subir la foto al almacenamiento
+    }
   }
 }
