@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:rackity/widgets/clothes_list_widget.dart';
 import '../colors.dart';
 import '../lists/clothes_list.dart';
+import '../widgets/filter_widget.dart';
+import '../screens/login_screen.dart';
 
 class ClosetTab extends StatefulWidget {
   const ClosetTab({Key? key}) : super(key: key);
@@ -55,62 +57,51 @@ class _ClosetTabState extends State<ClosetTab> {
                       child: Column(
                         children: [
                           Container(
-                              decoration: BoxDecoration(
-                                color: Colors.transparent,
-                              ),
-                              padding: EdgeInsets.only(
-                                  left: 26.0,
-                                  top: 20.0,
-                                  right: 24.0,
-                                  bottom: 10),
-                              alignment: Alignment.centerLeft,
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                            ),
+                            padding: EdgeInsets.only(
+                              left: 26.0,
+                              top: 20.0,
+                              right: 24.0,
+                              bottom: 10,
+                            ),
+                            alignment: Alignment.centerLeft,
+                            child: Material(
+                              color: Color(0xFFF2F2F2),
                               child: GestureDetector(
                                 onTap: () {
-                                  // Add your desired action here
-                                },
-                                child: Ink(
-                                  color: Colors.transparent,
-                                  child: InkWell(
-                                    borderRadius: BorderRadius.circular(20),
-                                    onTap: () {
-                                      // Add your desired action here
+                                  showDialog(
+                                    context: context,
+                                    barrierDismissible: true,
+                                    builder: (BuildContext context) {
+                                      return FilterWidget(); // Display your custom popup widget
                                     },
-                                    child: Material(
-                                      child: Ink(
-                                        decoration: BoxDecoration(
-                                          color: Color(0xFFF2F2F2),
-                                        ),
-                                        child: InkWell(
-                                          onTap: () {},
-                                          child: Row(
-                                            children: [
-                                              Text(
-                                                'Filtrar',
-                                                style: TextStyle(
-                                                  fontSize: 24.0,
-                                                  fontWeight: FontWeight.w300,
-                                                  color: Color(0xFF217269),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 25.0,
-                                                child: Icon(
-                                                  Icons.keyboard_arrow_right,
-                                                  color: Color(0xFF217269),
-                                                  size: 35,
-                                                ),
-                                              ),
-                                            ],
-                                          ), // other widget
-                                        ),
+                                  );
+                                },
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      'Filtrar',
+                                      style: TextStyle(
+                                        fontSize: 24.0,
+                                        fontWeight: FontWeight.w300,
+                                        color: Color(0xFF217269),
                                       ),
                                     ),
-                                    //AQUI
-
-                                    //AQUI
-                                  ),
+                                    SizedBox(
+                                      width: 25.0,
+                                      child: Icon(
+                                        Icons.keyboard_arrow_right,
+                                        color: Color(0xFF217269),
+                                        size: 35,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              )),
+                              ),
+                            ),
+                          ),
                           ClothesListWidget(),
                         ],
                       ))),
