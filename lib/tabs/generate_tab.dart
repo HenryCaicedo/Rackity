@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../colors.dart';
+import '../lists/outfits_list.dart';
 
 class GenerateTab extends StatefulWidget {
   @override
@@ -38,6 +39,7 @@ class _GenerateTabState extends State<GenerateTab> {
                 ElevatedButton(
                   onPressed: () {
                     // Code to be executed when the 'Auto' button is pressed
+                    generateAutoOutfit();
                   },
                   child: Text(
                     'Auto',

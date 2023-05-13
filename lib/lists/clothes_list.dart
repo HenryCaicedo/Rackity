@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -8,7 +9,7 @@ import 'package:flutter/widgets.dart';
 import '../widgets/filter_widget.dart' as fil;
 
 class Garment {
-  final int id;
+  final String id;
   final ImageProvider<Object> image;
 
   Garment({required this.id, required this.image});
@@ -16,45 +17,47 @@ class Garment {
 
 List<Garment> clothes = [];
 
+Future<Garment> getOne(String tipo) async {
+  List<String> idImages = await auth.AuthService.findPrendasByUsuario();
+  List<String> filtered =
+      await auth.AuthService.filterPrendasByTipo(idImages, [tipo]);
+  List<Garment> images = await auth.AuthService.getImagesForPrendas(filtered);
+  return getRandomGarment(images);
+}
+
+Garment getRandomGarment(List<Garment> garments) {
+  if (garments.isEmpty) {
+    throw Exception('La lista de prendas está vacía');
+  }
+
+  final Random random = Random();
+  final int randomIndex = random.nextInt(garments.length);
+
+  return garments[randomIndex];
+}
+
 Future<int?> obtenerIdUsuario() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   return prefs.getInt('idUsuario');
 }
 
-List<ImageProvider<Object>> obtenerImageProviders(List<String> rutasImagenes) {
-  List<ImageProvider<Object>> imageProviders = [];
-
-  for (String rutaImagen in rutasImagenes) {
-    ImageProvider<Object> imageProvider = FileImage(File(rutaImagen));
-    imageProviders.add(imageProvider);
-  }
-
-  return imageProviders;
-}
-
 Future<List<Garment>> createGarmentsList() async {
   print("----------------------------");
-  List<Garment> clothes = [];
-  int? idUsuario = await obtenerIdUsuario();
   List<String> tokens = await auth.AuthService.findPrendasByUsuario();
   if (fil.FilterWidgetState.filter) {
     tokens = await auth.AuthService.filterPrendasByTipo(
         tokens, fil.FilterWidgetState.selectedTags);
   }
-  List<ImageProvider<Object>> imagenes =
-      await auth.AuthService.getImagesForPrendas(tokens);
+  List<Garment> images = await auth.AuthService.getImagesForPrendas(tokens);
 
-//Aquí se lee cada una de las imagenes y se crean los objetos para para agregarlos a la lista de prendas
-  for (int i = 1; i <= imagenes.length; i++) {
-    print("----------------------------imagen #" + i.toString());
-
-    clothes.add(
-      Garment(
-        id: i,
-        image: imagenes[i - 1],
-      ),
-    );
-  }
-
-  return clothes;
+  return images;
 }
+
+// List<ImageProvider<Object>> obtenerImageProviders(List<String> rutasImagenes) {
+//   List<ImageProvider<Object>> imageProviders = [];
+//   for (String rutaImagen in rutasImagenes) {
+//     ImageProvider<Object> imageProvider = FileImage(File(rutaImagen));
+//     imageProviders.add(imageProvider);
+//   }
+//   return imageProviders;
+// }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rackity/lists/clothes_list.dart';
 import '../colors.dart';
 import '../screens/filtered_clothes_list.dart';
 import '../tabs/closet_tab.dart' as clo;

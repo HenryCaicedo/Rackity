@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import '../lists/clothes_list.dart';
+import '../lists/outfits_list.dart';
 
 class AuthService {
   static final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -56,6 +58,21 @@ class AuthService {
     } catch (e) {
       print('Error creating prenda document: $e');
     }
+  }
+
+  static addOutFitUser(Outfit outFit) async {
+    var idUsuario = getidUser();
+    FirebaseFirestore.instance.collection('outfits').add({
+      'idUsuario': idUsuario,
+      'idPrendaTop': outFit.top.id,
+      'idPrendaBottom': outFit.bottom.id,
+      'idPrendaFootwear': outFit.shoes.id,
+      'usos': 0,
+    }).then((value) {
+      print('Documento agregado con ID: ${value.id}');
+    }).catchError((error) {
+      print('Error al agregar el documento: $error');
+    });
   }
 
   static Future<List<ImageProvider<Object>>> getImagesForUser() async {
@@ -117,6 +134,71 @@ class AuthService {
     return prendasIDs;
   }
 
+  static Future<List<String>> findOutfitsByUsuario() async {
+    var idUsuario = getidUser();
+    final CollectionReference outfitsCollection =
+        FirebaseFirestore.instance.collection('outfits');
+    final List<String> outfitsIDs = [];
+
+    try {
+      final QuerySnapshot snapshot = await outfitsCollection
+          .where('idUsuario', isEqualTo: idUsuario)
+          .get();
+
+      for (final DocumentSnapshot doc in snapshot.docs) {
+        final String outfitID = doc.id;
+        outfitsIDs.add(outfitID);
+      }
+    } catch (e) {
+      print('Error finding outfits by usuario: $e');
+    }
+
+    return outfitsIDs;
+  }
+
+  static Future<List<String>> filterOutfitsByTipo(
+      List<String> outfitsIDs, List<String> filtro) async {
+    final List<String> prendasFiltradas = [];
+
+    return prendasFiltradas;
+  }
+
+  static Future<List<String>> filterOutfits(
+    List<String> outfitsIDs,
+    List<String> filtro,
+  ) async {
+    final CollectionReference outfitsCollection =
+        FirebaseFirestore.instance.collection('outfits');
+    final List<String> outfitsFiltrados = [];
+
+    try {
+      for (final String outfitID in outfitsIDs) {
+        final DocumentSnapshot snapshot =
+            await outfitsCollection.doc(outfitID).get();
+        final Map<String, dynamic>? data =
+            snapshot.data() as Map<String, dynamic>?;
+
+        if (data != null &&
+            data.containsKey('idPrendaTop') &&
+            data.containsKey('idPrendaBottom') &&
+            data.containsKey('idPrendaFootwear')) {
+          final String idPrendaTop = data['idPrendaTop'] as String;
+          final String idPrendaBottom = data['idPrendaBottom'] as String;
+          final String idPrendaFootwear = data['idPrendaFootwear'] as String;
+
+          // Aplica la condición que has mencionado aquí
+          if (true) {
+            outfitsFiltrados.add(outfitID);
+          }
+        }
+      }
+    } catch (e) {
+      print('Error filtering outfits: $e');
+    }
+
+    return outfitsFiltrados;
+  }
+
   static Future<List<String>> filterPrendasByTipo(
       List<String> prendasIDs, List<String> filtro) async {
     final CollectionReference prendasCollection =
@@ -149,9 +231,9 @@ class AuthService {
     return prendasFiltradas;
   }
 
-  static Future<List<ImageProvider<Object>>> getImagesForPrendas(
+  static Future<List<Garment>> getImagesForPrendas(
       List<String> prendasIDs) async {
-    List<ImageProvider<Object>> imageProviders = [];
+    List<Garment> imageProviders = [];
 
     try {
       for (final String prendaID in prendasIDs) {
@@ -171,7 +253,8 @@ class AuthService {
           final String imageUrl = await imageReference.getDownloadURL();
 
           // Añade el ImageProvider a la lista
-          imageProviders.add(Image.network(imageUrl).image);
+          imageProviders
+              .add(Garment(id: prendaID, image: Image.network(imageUrl).image));
         }
       }
     } catch (e) {
@@ -221,5 +304,75 @@ class AuthService {
   static Future<void> signOut() async {
     await _auth.signOut();
     await _googleSignIn.signOut();
+  }
+
+  static Future<List<Outfit>> getOutfitsByID(List<String> outfitsIDs) async {
+    final CollectionReference outfitsCollection =
+        FirebaseFirestore.instance.collection('outfits');
+    final CollectionReference prendasCollection =
+        FirebaseFirestore.instance.collection('prendas');
+    final List<Outfit> outfits = [];
+
+    try {
+      for (final String outfitID in outfitsIDs) {
+        final DocumentSnapshot outfitSnapshot =
+            await outfitsCollection.doc(outfitID).get();
+        final Map<String, dynamic>? outfitData =
+            outfitSnapshot.data() as Map<String, dynamic>?;
+
+        if (outfitData != null &&
+            outfitData.containsKey('idPrendaTop') &&
+            outfitData.containsKey('idPrendaBottom') &&
+            outfitData.containsKey('idPrendaFootwear')) {
+          final String idPrendaTop = outfitData['idPrendaTop'] as String;
+          final String idPrendaBottom = outfitData['idPrendaBottom'] as String;
+          final String idPrendaFootwear =
+              outfitData['idPrendaFootwear'] as String;
+
+          final DocumentSnapshot topSnapshot =
+              await prendasCollection.doc(idPrendaTop).get();
+          final DocumentSnapshot bottomSnapshot =
+              await prendasCollection.doc(idPrendaBottom).get();
+          final DocumentSnapshot footwearSnapshot =
+              await prendasCollection.doc(idPrendaFootwear).get();
+
+          final String topTokenImage =
+              topSnapshot['tokenImagen'] as String? ?? '';
+          final String bottomTokenImage =
+              bottomSnapshot['tokenImagen'] as String? ?? '';
+          final String footwearTokenImage =
+              footwearSnapshot['tokenImagen'] as String? ?? '';
+
+          final Reference topImageReference =
+              FirebaseStorage.instance.ref().child(topTokenImage);
+          final Reference bottomImageReference =
+              FirebaseStorage.instance.ref().child(bottomTokenImage);
+          final Reference footwearImageReference =
+              FirebaseStorage.instance.ref().child(footwearTokenImage);
+
+          final String topImageUrl = await topImageReference.getDownloadURL();
+          final String bottomImageUrl =
+              await bottomImageReference.getDownloadURL();
+          final String footwearImageUrl =
+              await footwearImageReference.getDownloadURL();
+
+          final Garment topGarment =
+              Garment(id: idPrendaTop, image: Image.network(topImageUrl).image);
+          final Garment bottomGarment = Garment(
+              id: idPrendaBottom, image: Image.network(bottomImageUrl).image);
+          final Garment footwearGarment = Garment(
+              id: idPrendaFootwear,
+              image: Image.network(footwearImageUrl).image);
+
+          final Outfit outfit = Outfit(
+              top: topGarment, bottom: bottomGarment, shoes: footwearGarment);
+          outfits.add(outfit);
+        }
+      }
+    } catch (e) {
+      print('Error retrieving outfits by ID: $e');
+    }
+
+    return outfits;
   }
 }

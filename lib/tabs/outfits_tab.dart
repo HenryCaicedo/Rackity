@@ -6,8 +6,19 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import '../colors.dart';
 import '../widgets/outfits_list_widget.dart';
 
-class OutfitsTab extends StatelessWidget {
+class OutfitsTab extends StatefulWidget {
   const OutfitsTab({Key? key}) : super(key: key);
+
+  @override
+  State<OutfitsTab> createState() => _OutfitsTabState();
+}
+
+class _OutfitsTabState extends State<OutfitsTab> {
+  @override
+  void initState() {
+    createOutfit();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -211,5 +222,12 @@ class OutfitsTab extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void createOutfit() async {
+    outfits = await createOutfitsList();
+    setState(() {
+      outfits;
+    });
   }
 }
