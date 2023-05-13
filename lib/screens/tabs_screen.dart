@@ -5,6 +5,7 @@ import '../tabs/generate_tab.dart';
 import '../tabs/outfits_tab.dart';
 import '../tabs/profile_tab.dart';
 import '../tabs/camera_tab.dart';
+import '../tabs/calendar_tab.dart';
 
 class SquareIconButton extends StatelessWidget {
   final IconData icon;
@@ -19,7 +20,8 @@ class SquareIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var size = 63.0;
+    //El normal es 63
+    var size = 60.0;
     var ratio = 1;
     return SizedBox(
       width: size * ratio,
@@ -36,7 +38,7 @@ class SquareIconButton extends StatelessWidget {
         ),
         child: Icon(
           icon,
-          size: 32,
+          size: 30,
           color: isSelected ? Color(0xFFF2A444) : Color(0xFF63BFAE),
         ),
       ),
@@ -57,9 +59,10 @@ class _TabsScreenState extends State<TabsScreen> {
   final List<Widget> _tabs = [
     ClosetTab(),
     GenerateTab(),
-    CameraTab(), // new
+    CameraTab(),
     OutfitsTab(),
     ProfileTab(),
+    CalendarTab(),
   ];
 
   @override
@@ -144,13 +147,22 @@ class _TabsScreenState extends State<TabsScreen> {
                           icon: Icons.person,
                           isSelected: _selectedIndex == 4,
                         ),
+                        SquareIconButton(
+                          onPressed: () {
+                            setState(() {
+                              _selectedIndex = 5;
+                            });
+                          },
+                          icon: Icons.calendar_today,
+                          isSelected: _selectedIndex == 5,
+                        ),
                       ],
                     ),
                   ),
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

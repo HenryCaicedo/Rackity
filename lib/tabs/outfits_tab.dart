@@ -11,6 +11,106 @@ class OutfitsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var side = 128.0;
+    var radius = 14.0;
+
+    Widget cuadrados = Expanded(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            width: side,
+            height: side,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(radius),
+                color: Color.fromARGB(255, 255, 255, 255),
+                boxShadow: [
+                  BoxShadow(
+                    color: Color.fromRGBO(0, 0, 0, 0.847).withOpacity(0.08),
+                    spreadRadius: 1,
+                    blurRadius: 3,
+                    offset: Offset(0, 2),
+                  ),
+                ]),
+          ),
+          SizedBox(height: 14),
+          Container(
+            width: side,
+            height: side * 1.2,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(radius),
+                color: Color.fromARGB(255, 255, 255, 255),
+                boxShadow: [
+                  BoxShadow(
+                    color: Color.fromRGBO(0, 0, 0, 0.847).withOpacity(0.08),
+                    spreadRadius: 1,
+                    blurRadius: 3,
+                    offset: Offset(0, 2),
+                  ),
+                ]),
+          ),
+          SizedBox(height: 14),
+          Container(
+            width: side,
+            height: side,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(radius),
+                color: Color.fromARGB(255, 255, 255, 255),
+                boxShadow: [
+                  BoxShadow(
+                    color: Color.fromRGBO(0, 0, 0, 0.847).withOpacity(0.08),
+                    spreadRadius: 1,
+                    blurRadius: 3,
+                    offset: Offset(0, 2),
+                  ),
+                ]),
+          ),
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                child: Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Color(0xFFE7A757),
+                  ),
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.add,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {},
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                child: Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Color(0xFFE7A757),
+                  ),
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.swap_horiz,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {},
+                  ),
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       body: SafeArea(

@@ -16,6 +16,7 @@ class ClosetTab extends StatefulWidget {
 class ClosetTabState extends State<ClosetTab> {
   @override
   void initState() {
+    //Comenta la siguiente linea para quitar el error:
     createClothes();
     // fil.FilterWidgetState.filter = false;
     super.initState();

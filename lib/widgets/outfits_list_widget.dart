@@ -42,9 +42,12 @@ class OutfitsListWidget extends StatelessWidget {
                   constraints: BoxConstraints(
                     maxHeight: size * 1.2,
                   ),
-                  child: Image(
-                    image: outfit.top.image,
-                    fit: BoxFit.cover,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image(
+                      image: outfit.top.image,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
@@ -71,10 +74,13 @@ class OutfitsListWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: Image(
-                    image: outfit.bottom.image,
-                    fit: BoxFit.cover,
-                    alignment: Alignment.topCenter,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image(
+                      image: outfit.bottom.image,
+                      fit: BoxFit.cover,
+                      alignment: Alignment.topCenter,
+                    ),
                   ),
                 ),
               ),
@@ -101,9 +107,12 @@ class OutfitsListWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: Image(
-                    image: outfit.shoes.image,
-                    fit: BoxFit.cover,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image(
+                      image: outfit.shoes.image,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
