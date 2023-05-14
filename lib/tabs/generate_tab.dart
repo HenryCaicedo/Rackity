@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../colors.dart';
 import '../lists/outfits_list.dart';
+import '../screens/clothes_picker_widget.dart';
 
 class GenerateTab extends StatefulWidget {
   @override
@@ -91,27 +92,46 @@ class _GenerateTabState extends State<GenerateTab> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  width: side,
-                  height: side,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(radius),
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      boxShadow: [
-                        BoxShadow(
-                          color:
-                              Color.fromRGBO(0, 0, 0, 0.847).withOpacity(0.08),
-                          spreadRadius: 1,
-                          blurRadius: 3,
-                          offset: Offset(0, 2),
-                        ),
-                      ]),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ClothesPickerWidget(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    width: side,
+                    height: side,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(radius),
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color.fromRGBO(0, 0, 0, 0.847)
+                                .withOpacity(0.08),
+                            spreadRadius: 1,
+                            blurRadius: 3,
+                            offset: Offset(0, 2),
+                          ),
+                        ]),
+                  ),
                 ),
                 SizedBox(height: 14),
-                Container(
-                  width: side,
-                  height: side * 1.2,
-                  decoration: BoxDecoration(
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ClothesPickerWidget(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    width: side,
+                    height: side * 1.2,
+                    decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(radius),
                       color: Color.fromARGB(255, 255, 255, 255),
                       boxShadow: [
@@ -122,24 +142,36 @@ class _GenerateTabState extends State<GenerateTab> {
                           blurRadius: 3,
                           offset: Offset(0, 2),
                         ),
-                      ]),
+                      ],
+                    ),
+                  ),
                 ),
                 SizedBox(height: 14),
-                Container(
-                  width: side,
-                  height: side,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(radius),
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      boxShadow: [
-                        BoxShadow(
-                          color:
-                              Color.fromRGBO(0, 0, 0, 0.847).withOpacity(0.08),
-                          spreadRadius: 1,
-                          blurRadius: 3,
-                          offset: Offset(0, 2),
-                        ),
-                      ]),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ClothesPickerWidget(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    width: side,
+                    height: side,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(radius),
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color.fromRGBO(0, 0, 0, 0.847)
+                                .withOpacity(0.08),
+                            spreadRadius: 1,
+                            blurRadius: 3,
+                            offset: Offset(0, 2),
+                          ),
+                        ]),
+                  ),
                 ),
                 SizedBox(height: 20),
                 Row(

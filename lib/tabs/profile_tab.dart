@@ -20,9 +20,15 @@ class ProfileTab extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 60,
+                  backgroundColor:
+                      Color(0xFFB2DFBD), // set the background color to red
                   child: Transform.scale(
-                    scale: 3.0, // increased the scale factor to 2.0
-                    child: Icon(Icons.person),
+                    scale: 3.0,
+                    child: Icon(
+                      Icons.person,
+                      color: Color.fromARGB(
+                          255, 89, 112, 95), // set the icon color to blue
+                    ),
                   ),
                 ),
                 SizedBox(height: 16),

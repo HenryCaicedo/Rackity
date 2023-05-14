@@ -16,7 +16,7 @@ class OutfitsTab extends StatefulWidget {
 class _OutfitsTabState extends State<OutfitsTab> {
   @override
   void initState() {
-    //createOutfit();
+    createOutfit();
     super.initState();
   }
 

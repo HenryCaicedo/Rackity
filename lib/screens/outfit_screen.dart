@@ -14,15 +14,16 @@ class OutfitScreen extends StatelessWidget {
       fontWeight: FontWeight.w500,
     );
     return Material(
+      color: Color(0xFFF5F5F5),
       child: Container(
-        color: Color(0xFFF2F2F2), // set the background color of the container
+        color: Color(0xFFF5F5F5), // set the background color of the container
         child: Column(
           children: [
             Expanded(
               flex: 4,
               child: Container(
                 padding: EdgeInsets.fromLTRB(0, 55, 0, 0),
-                color: Colors.red,
+                color: Colors.transparent,
                 alignment: Alignment.bottomLeft,
                 child: IconButton(
                   iconSize: 80,
@@ -34,10 +35,11 @@ class OutfitScreen extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(height: 4),
             Expanded(
               flex: 19,
               child: Container(
-                color: Colors.yellow,
+                color: Colors.transparent,
                 child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -110,10 +112,11 @@ class OutfitScreen extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(height: 5),
             Expanded(
               flex: 3,
               child: Container(
-                color: Colors.green,
+                color: Colors.transparent,
                 child: Column(
                   children: [
                     Padding(
