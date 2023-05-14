@@ -21,7 +21,7 @@ class SquareIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //El normal es 63
-    var size = 60.0;
+    var size = 63.0;
     var ratio = 1;
     return SizedBox(
       width: size * ratio,
@@ -38,7 +38,7 @@ class SquareIconButton extends StatelessWidget {
         ),
         child: Icon(
           icon,
-          size: 30,
+          size: 32,
           color: isSelected ? Color(0xFFF2A444) : Color(0xFF63BFAE),
         ),
       ),
@@ -138,7 +138,7 @@ class _TabsScreenState extends State<TabsScreen> {
                           icon: Icons.group_work,
                           isSelected: _selectedIndex == 3,
                         ),
-                        SquareIconButton(
+                        /*  SquareIconButton(
                           onPressed: () {
                             setState(() {
                               _selectedIndex = 4;
@@ -146,7 +146,7 @@ class _TabsScreenState extends State<TabsScreen> {
                           },
                           icon: Icons.person,
                           isSelected: _selectedIndex == 4,
-                        ),
+                        ),*/
                         SquareIconButton(
                           onPressed: () {
                             setState(() {

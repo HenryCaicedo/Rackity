@@ -7,7 +7,6 @@ class ProfileTab extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Profile'),
-        automaticallyImplyLeading: false, // removes the back button
       ),
       body: Center(
           child: Card(

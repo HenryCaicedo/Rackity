@@ -201,13 +201,26 @@ class _CameraTabState extends State<CameraTab> {
               padding: EdgeInsets.only(
                   left: 16.0, top: 32.0, right: 24.0, bottom: 16),
               alignment: Alignment.centerLeft,
-              child: Text(
-                'Agregar prenda',
-                style: TextStyle(
-                  fontSize: 36.0,
-                  fontWeight: FontWeight.w500,
-                  color: textColor,
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Agregar prenda',
+                    style: TextStyle(
+                      fontSize: 36.0,
+                      fontWeight: FontWeight.w500,
+                      color: textColor,
+                    ),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.account_circle),
+                    iconSize: 32.0,
+                    color: textColor,
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/profile');
+                    },
+                  ),
+                ],
               ),
             ),
             Expanded(

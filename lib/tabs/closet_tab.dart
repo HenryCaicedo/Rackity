@@ -30,18 +30,35 @@ class ClosetTabState extends State<ClosetTab> {
         child: Column(
           children: [
             Container(
-              decoration:
-                  BoxDecoration(color: Theme.of(context).colorScheme.primary),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.primary,
+              ),
               padding: EdgeInsets.only(
-                  left: 16.0, top: 32.0, right: 24.0, bottom: 16),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Mis prendas',
-                style: TextStyle(
-                  fontSize: 36.0,
-                  fontWeight: FontWeight.w500,
-                  color: textColor,
-                ),
+                left: 16.0,
+                top: 32.0,
+                right: 24.0,
+                bottom: 16,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Mis prendas',
+                    style: TextStyle(
+                      fontSize: 36.0,
+                      fontWeight: FontWeight.w500,
+                      color: textColor,
+                    ),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.account_circle),
+                    iconSize: 32.0,
+                    color: textColor,
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/profile');
+                    },
+                  ),
+                ],
               ),
             ),
             Expanded(

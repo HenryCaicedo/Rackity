@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:rackity/tabs/profile_tab.dart';
 import 'screens/login_screen.dart';
 import 'screens/signup_screen.dart';
 import 'screens/tabs_screen.dart';
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LoginScreen(),
         '/signup': (context) => SignupScreen(),
         '/form': (context) => FormScreen(),
+        '/profile': (context) => ProfileTab(),
       },
     );
   }
