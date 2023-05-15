@@ -78,7 +78,7 @@ class LoginScreen extends StatelessWidget {
                   const SizedBox(height: 40.0),
                   CustomTextField(
                     controller: usernameController,
-                    hintText: 'username',
+                    hintText: 'email',
                   ),
                   SizedBox(height: 12.0),
                   CustomTextField(
@@ -90,10 +90,7 @@ class LoginScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       TextButton(
-                        onPressed: () async {
-                          await auth.AuthService.signIn(usernameController.text,
-                              passwordController.text, context);
-                        },
+                        onPressed: () async {},
                         child: const Text(
                           'Forgot password?',
                           style: TextStyle(color: textColor),
@@ -111,7 +108,7 @@ class LoginScreen extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: () async {
                           // await auth.AuthService.signInWithGoogle(context);
-                          logIn(usernameController.text,
+                          await auth.AuthService.signIn(usernameController.text,
                               passwordController.text, context);
                         },
                         style: ElevatedButton.styleFrom(
