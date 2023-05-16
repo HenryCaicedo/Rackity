@@ -5,6 +5,7 @@ import '../lists/clothes_list.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import '../colors.dart';
 import '../widgets/outfits_list_widget.dart';
+import '../widgets/filter_widget_outfits.dart';
 
 class OutfitsTab extends StatefulWidget {
   const OutfitsTab({Key? key}) : super(key: key);
@@ -171,62 +172,76 @@ class _OutfitsTabState extends State<OutfitsTab> {
                       child: Column(
                         children: [
                           Container(
-                              decoration: BoxDecoration(
-                                color: Colors.transparent,
-                              ),
-                              padding: EdgeInsets.only(
-                                  left: 26.0,
-                                  top: 20.0,
-                                  right: 24.0,
-                                  bottom: 10),
-                              alignment: Alignment.centerLeft,
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                            ),
+                            padding: EdgeInsets.only(
+                              left: 26.0,
+                              top: 20.0,
+                              right: 24.0,
+                              bottom: 10,
+                            ),
+                            alignment: Alignment.centerLeft,
+                            child: Material(
+                              color: Color(0xFFF2F2F2),
                               child: GestureDetector(
                                 onTap: () {
-                                  // Add your desired action here
-                                },
-                                child: Ink(
-                                  color: Colors.transparent,
-                                  child: InkWell(
-                                    borderRadius: BorderRadius.circular(20),
-                                    onTap: () {
-                                      // Add your desired action here
+                                  showDialog(
+                                    context: context,
+                                    barrierDismissible: true,
+                                    builder: (BuildContext context) {
+                                      return FilterWidgetOutfits(); // Display your custom popup widget
                                     },
-                                    child: Material(
-                                      child: Ink(
-                                        decoration: BoxDecoration(
-                                          color: Color(0xFFF2F2F2),
+                                  );
+                                },
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(
+                                          'Filtrar',
+                                          style: TextStyle(
+                                            fontSize: 24.0,
+                                            fontWeight: FontWeight.w300,
+                                            color: Color(0xFF217269),
+                                          ),
                                         ),
-                                        child: InkWell(
-                                          onTap: () {},
-                                          child: Row(
-                                            children: [
-                                              Text(
-                                                'Filtrar',
-                                                style: TextStyle(
-                                                  fontSize: 24.0,
-                                                  fontWeight: FontWeight.w300,
-                                                  color: Color(0xFF217269),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 25.0,
-                                                child: Icon(
-                                                  Icons.keyboard_arrow_right,
-                                                  color: Color(0xFF217269),
-                                                  size: 35,
-                                                ),
-                                              ),
-                                            ],
-                                          ), // other widget
+                                        SizedBox(
+                                          width: 25.0,
+                                          child: Icon(
+                                            Icons.keyboard_arrow_right,
+                                            color: Color(0xFF217269),
+                                            size: 35,
+                                          ),
                                         ),
-                                      ),
+                                      ],
                                     ),
-                                    //AQUI
-
-                                    //AQUI
-                                  ),
+                                    Row(
+                                      children: [
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            // Apply button logic here
+                                          },
+                                          child: Text('Aplicar'),
+                                        ),
+                                        SizedBox(
+                                            width:
+                                                10), // Adding some spacing between the buttons
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            // Remove filter button logic here
+                                          },
+                                          child: Text('Quitar filtro'),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
                                 ),
-                              )),
+                              ),
+                            ),
+                          ),
                           OutfitsListWidget(),
                         ],
                       ))),
