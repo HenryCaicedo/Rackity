@@ -5,6 +5,7 @@ import '../lists/outfits_list.dart';
 import '../screens/clothes_picker_widget.dart';
 import '../lists/clothes_list.dart';
 import 'Comparing model.dart';
+import '../auth_service.dart' as auth;
 
 class GenerateTab extends StatefulWidget {
   @override
@@ -21,7 +22,64 @@ class _GenerateTabState extends State<GenerateTab> {
     setState(() => _selectedIndex3 = index);
   }
 
+  List<Garment> top = [];
+  List<Garment> bottom = [];
+  List<Garment> footwear = [];
+
   List topList = [];
+  List bottomList = [];
+  List footwearList = [];
+  createTop() async {
+    List<String> tokens = await auth.AuthService.findPrendasByUsuario();
+
+    tokens = await auth.AuthService.filterPrendasByTipo(tokens, ["Top"]);
+    List<Garment> images = await auth.AuthService.getImagesForPrendas(tokens);
+    top = images;
+    print("t");
+    print(top);
+    var a = top.map((e) => CompareModel(
+          shirtI: e.image,
+          idS: e.id,
+        ));
+    print(a);
+    setState(() {
+      topList.addAll(a);
+    });
+  }
+
+  createBottom() async {
+    List<String> tokens = await auth.AuthService.findPrendasByUsuario();
+
+    tokens = await auth.AuthService.filterPrendasByTipo(tokens, ["Bottom"]);
+    List<Garment> images = await auth.AuthService.getImagesForPrendas(tokens);
+    bottom = images;
+    print("b");
+    print(bottom);
+    var b = bottom.map((e) => CompareModel(
+          paintI: e.image,
+          idP: e.id,
+        ));
+    setState(() {
+      bottomList.addAll(b);
+    });
+  }
+
+  createFootwear() async {
+    List<String> tokens = await auth.AuthService.findPrendasByUsuario();
+
+    tokens = await auth.AuthService.filterPrendasByTipo(tokens, ["Footwear"]);
+    List<Garment> images = await auth.AuthService.getImagesForPrendas(tokens);
+    footwear = images;
+    print("f");
+    print(footwear);
+    var c = footwear.map((e) => CompareModel(
+          shoesI: e.image,
+          idSh: e.id,
+        ));
+    setState(() {
+      footwearList.addAll(c);
+    });
+  }
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
@@ -29,16 +87,10 @@ class _GenerateTabState extends State<GenerateTab> {
   void initState() {
     setState(() {});
     // TODO: implement initState
+    createTop();
+    createBottom();
+    createFootwear();
 
-    final a = clothes.map((e) => CompareModel(
-          shirtI: e.image,
-          paintI: e.image,
-          shoesI: e.image,
-          idS: e.id,
-          idP: e.id,
-          idSh: e.id,
-        ));
-    topList.addAll(a);
     super.initState();
   }
 
@@ -105,11 +157,12 @@ class _GenerateTabState extends State<GenerateTab> {
                                 id: topList[_selectedIndex1].idS,
                                 image: topList[_selectedIndex1].shirtI),
                             bottom: Garment(
-                                id: topList[_selectedIndex2].idP,
-                                image: topList[_selectedIndex2].paintI),
+                                id: bottomList[_selectedIndex2].idP,
+                                image: bottomList[_selectedIndex2].paintI),
                             shoes: Garment(
-                                id: topList[_selectedIndex3].idSh,
-                                image: topList[_selectedIndex3].shoesI),date: DateTime.now());
+                                id: footwearList[_selectedIndex3].idSh,
+                                image: footwearList[_selectedIndex3].shoesI),
+                            date: DateTime.now());
                         addManual(manualOutfit!);
                       },
                       child: Text(
@@ -184,7 +237,7 @@ class _GenerateTabState extends State<GenerateTab> {
                 height: 150,
                 child: ListView.builder(
                   shrinkWrap: true,
-                  itemCount: topList.length,
+                  itemCount: bottomList.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (BuildContext context, int index) {
                     return InkWell(
@@ -194,9 +247,9 @@ class _GenerateTabState extends State<GenerateTab> {
                         });
                       },
                       child: Container(
-                        child: topList[index].paint == null
-                            ? Image(image: topList[index].paintI)
-                            : Image.network(topList[index].paint.toString()),
+                        child: bottomList[index].paint == null
+                            ? Image(image: bottomList[index].paintI)
+                            : Image.network(bottomList[index].paint.toString()),
                         // child: Image.asset(Images[index].toString()),
                         width: side,
                         height: side,
@@ -226,7 +279,7 @@ class _GenerateTabState extends State<GenerateTab> {
                 height: 150,
                 child: ListView.builder(
                   shrinkWrap: true,
-                  itemCount: topList.length,
+                  itemCount: footwearList.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (BuildContext context, int index) {
                     return InkWell(
@@ -236,9 +289,10 @@ class _GenerateTabState extends State<GenerateTab> {
                         });
                       },
                       child: Container(
-                        child: topList[index].shoes == null
-                            ? Image(image: topList[index].shoesI)
-                            : Image.network(topList[index].shoes.toString()),
+                        child: footwearList[index].shoes == null
+                            ? Image(image: footwearList[index].shoesI)
+                            : Image.network(
+                                footwearList[index].shoes.toString()),
                         // child: Image.asset(Images[index].toString()),
                         width: side,
                         height: side,
