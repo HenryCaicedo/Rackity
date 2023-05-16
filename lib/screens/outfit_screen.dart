@@ -35,7 +35,7 @@ class OutfitScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 4),
+            SizedBox(height: 10),
             Expanded(
               flex: 19,
               child: Container(
@@ -112,7 +112,7 @@ class OutfitScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 5),
+            SizedBox(height: 10),
             Expanded(
               flex: 3,
               child: Container(
@@ -122,7 +122,16 @@ class OutfitScreen extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.fromLTRB(0, 0, 00, 0),
                       child: Row(
-                        children: [],
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {
+                              // Add your calendar button functionality here
+                              print('Calendar button pressed');
+                            },
+                            child: Text('Calendar'),
+                          ),
+                        ],
                       ),
                     ),
                   ],

@@ -1,11 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:rackity/tabs/outfits_tab.dart';
 import 'package:rackity/tabs/profile_tab.dart';
 import 'screens/login_screen.dart';
 import 'screens/signup_screen.dart';
 import 'screens/tabs_screen.dart';
 import 'widgets/clothes_list_widget.dart';
 import 'screens/form_screen.dart';
+import 'tabs/closet_tab.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,6 +51,8 @@ class MyApp extends StatelessWidget {
         '/signup': (context) => SignupScreen(),
         '/form': (context) => FormScreen(),
         '/profile': (context) => ProfileTab(),
+        '/closet': (context) => ClosetTab(),
+        '/outfits': (context) => OutfitsTab(),
       },
     );
   }

@@ -17,6 +17,7 @@ class ClosetTabState extends State<ClosetTab> {
   @override
   void initState() {
     //Comenta la siguiente linea para quitar el error:
+
     createClothes();
     // fil.FilterWidgetState.filter = false;
     super.initState();
@@ -100,22 +101,58 @@ class ClosetTabState extends State<ClosetTab> {
                                   );
                                 },
                                 child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(
-                                      'Filtrar',
-                                      style: TextStyle(
-                                        fontSize: 24.0,
-                                        fontWeight: FontWeight.w300,
-                                        color: Color(0xFF217269),
-                                      ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          'Filtrar',
+                                          style: TextStyle(
+                                            fontSize: 24.0,
+                                            fontWeight: FontWeight.w300,
+                                            color: Color(0xFF217269),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 25.0,
+                                          child: Icon(
+                                            Icons.keyboard_arrow_right,
+                                            color: Color(0xFF217269),
+                                            size: 35,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    SizedBox(
-                                      width: 25.0,
-                                      child: Icon(
-                                        Icons.keyboard_arrow_right,
-                                        color: Color(0xFF217269),
-                                        size: 35,
-                                      ),
+                                    Row(
+                                      children: [
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            // Apply button logic here
+                                            if (fil.FilterWidgetState
+                                                    .selectedTags ==
+                                                []) {
+                                            } else {
+                                              fil.FilterWidgetState.filter =
+                                                  true;
+                                              createClothes();
+                                            }
+                                          },
+                                          child: Text('Aplicar'),
+                                        ),
+                                        SizedBox(
+                                            width:
+                                                10), // Adding some spacing between the buttons
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            // Remove filter button logic here
+                                            fil.FilterWidgetState.filter =
+                                                false;
+                                            createClothes();
+                                          },
+                                          child: Text('Quitar filtro'),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
