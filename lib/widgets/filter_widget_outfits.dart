@@ -4,12 +4,12 @@ import '../colors.dart';
 import '../screens/filtered_clothes_list.dart';
 import '../tabs/closet_tab.dart' as clo;
 
-class FilterWidget extends StatefulWidget {
+class FilterWidgetOutfits extends StatefulWidget {
   @override
-  FilterWidgetState createState() => FilterWidgetState();
+  FilterWidgetOutfitsState createState() => FilterWidgetOutfitsState();
 }
 
-class FilterWidgetState extends State<FilterWidget> {
+class FilterWidgetOutfitsState extends State<FilterWidgetOutfits> {
   static String selectedGarmentType = 'Top';
 
   List<String> garmentTags = [
@@ -20,9 +20,6 @@ class FilterWidgetState extends State<FilterWidget> {
     "Formal",
     "Accessories",
     "Swimwear",
-    'Top',
-    'Bottom',
-    'Footwear',
   ];
   static bool filter = false;
   static List<String> selectedTags = [];
