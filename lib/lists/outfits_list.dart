@@ -13,6 +13,11 @@ class Outfit {
 
 //Esta es la lista que se muestra en la app
 List<Outfit> outfits = [];
+
+addManual(Outfit manualOutfit) async {
+  await auth.AuthService.addOutFitUser(manualOutfit);
+}
+
 Future<Outfit> generateAutoOutfit() async {
   Outfit autoOutFit = Outfit(
       top: await getOne("Top"),
