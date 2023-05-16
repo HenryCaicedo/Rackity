@@ -7,8 +7,9 @@ class Outfit {
   final Garment top;
   final Garment bottom;
   final Garment shoes;
+  final DateTime date;
 
-  Outfit({required this.top, required this.bottom, required this.shoes});
+  Outfit({required this.top, required this.bottom, required this.shoes, required this.date});
 }
 
 //Esta es la lista que se muestra en la app
@@ -17,7 +18,8 @@ Future<Outfit> generateAutoOutfit() async {
   Outfit autoOutFit = Outfit(
       top: await getOne("Top"),
       bottom: await getOne("Bottom"),
-      shoes: await getOne("Footwear"));
+      shoes: await getOne("Footwear"),
+      date: DateTime.now());
   await auth.AuthService.addOutFitUser(autoOutFit);
   return autoOutFit;
 }

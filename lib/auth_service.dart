@@ -365,7 +365,7 @@ class AuthService {
               image: Image.network(footwearImageUrl).image);
 
           final Outfit outfit = Outfit(
-              top: topGarment, bottom: bottomGarment, shoes: footwearGarment);
+              top: topGarment, bottom: bottomGarment, shoes: footwearGarment,date: DateTime.now());
           outfits.add(outfit);
         }
       }

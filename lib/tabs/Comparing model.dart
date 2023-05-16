@@ -7,7 +7,8 @@ class CompareModel {
   ImageProvider<Object>? shirtI;
   ImageProvider<Object>? paintI;
   ImageProvider<Object>? shoesI;
-  CompareModel({this.shirt, this.paint, this.shoes, this.shirtI, this.paintI, this.shoesI});
+  DateTime? date;
+  CompareModel({this.shirt, this.paint, this.shoes, this.shirtI, this.paintI, this.shoesI, this.date});
   factory CompareModel.fromjson(Map<String, dynamic> json) {
     return CompareModel(
         shirt: json["t"], paint: json["paint"], shoes: json["shoes"]);

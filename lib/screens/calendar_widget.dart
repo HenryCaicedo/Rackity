@@ -1,20 +1,102 @@
 import 'package:flutter/material.dart';
-import 'package:rackity/lists/outfits_list.dart';
+import 'package:rackity/tabs/Comparing%20model.dart';
+import 'package:intl/intl.dart';
 import 'dart:math';
-import '../lists/clothes_list.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import '../screens/outfit_screen.dart';
 
-class OutfitsListWidget extends StatelessWidget {
-  const OutfitsListWidget({Key? key}) : super(key: key);
+import '../lists/outfits_list.dart';
+
+class CalendarScreen extends StatefulWidget {
+  const CalendarScreen({super.key});
+
+  //final List<CompareModel> compiList;
+
 
   @override
-  Widget build(BuildContext context) {
-    var size = 60.0;
+  State<CalendarScreen> createState() => _CalendarScreenState();
+}
+
+class _CalendarScreenState extends State<CalendarScreen> {
+  DateTime selectedDate = DateTime.now();
+  var size = 60.0;
     var x = 7.0;
     var y = -12.0;
 
-    Widget clothesGroup(Outfit outfit) {
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime(2100),
+    );
+
+    if (pickedDate != null) {
+      setState(() {
+        selectedDate = pickedDate;
+      });
+    }
+  }
+
+  bool isSameDay(DateTime a, DateTime b) {
+    return a.year == b.year && a.month == b.month && a.day == b.day;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final clothesToShow = outfits.where((outfit) => isSameDay(outfit.date, selectedDate)).toList();
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Calendar View'),
+      ),
+      body: Column(
+        children: [
+          // Scrollable list of dates
+          Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              selectedDate != null
+                  ? '${DateFormat('dd/MM/yyyy').format(selectedDate)}'
+                  : 'No date selected',
+            ),
+            const SizedBox(width: 10),
+            ElevatedButton(
+              onPressed: () => _selectDate(context),
+              child: Text('Select Date'),
+            ),
+          ],
+        ),
+      ),
+
+          // Content grid
+          Expanded(
+            child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2, // Adjust the column count according to your needs
+              ),
+              itemCount: clothesToShow.length,
+              itemBuilder: (context, index) {
+                final outfit = clothesToShow[index];
+
+                return GestureDetector(
+                  onTap: () {
+                    // Handle item selection
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(8),
+                    child: clothesGroup(outfit),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget clothesGroup(Outfit outfit) {
       return Container(
         width: 150,
         height: 150,
@@ -122,34 +204,36 @@ class OutfitsListWidget extends StatelessWidget {
       );
     }
 
-    return Expanded(
-      child: Material(
-        color: Colors.transparent,
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(30.0, 0.0, 30.0, 0.0),
-          child: StaggeredGridView.countBuilder(
-            crossAxisCount: 2,
-            itemCount: outfits.length,
-            itemBuilder: (BuildContext context, int index) {
-              Outfit outfit = outfits[index];
-              return GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => OutfitScreen(outfit: outfit),
-                    ),
-                  );
-                },
-                child: clothesGroup(outfit),
-              );
-            },
-            staggeredTileBuilder: (int index) => StaggeredTile.fit(1),
-            mainAxisSpacing: 4,
-            crossAxisSpacing: 0,
-          ),
-        ),
-      ),
-    );
+  String _getMonthAbbreviation(int month) {
+    // Implement your own logic to get the month abbreviation
+    // Here's a basic example
+    switch (month) {
+      case 1:
+        return 'Jan';
+      case 2:
+        return 'Feb';
+      case 3:
+        return 'Mar';
+      case 4:
+        return 'Apr';
+      case 5:
+        return 'May';
+      case 6:
+        return 'Jun';
+      case 7:
+        return 'Jul';
+      case 8:
+        return 'Aug';
+      case 9:
+        return 'Sep';
+      case 10:
+        return 'Oct';
+      case 11:
+        return 'Nov';
+      case 12:
+        return 'Dec';
+      default:
+        return '';
+    }
   }
 }
