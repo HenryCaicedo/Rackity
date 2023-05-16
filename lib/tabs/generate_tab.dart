@@ -136,7 +136,7 @@ class _GenerateTabState extends State<GenerateTab> {
                 ),
               ),
               Container(
-                height: 200,
+                height: 150,
                 child: ListView.builder(
                   shrinkWrap: true,
                   itemCount: topList.length,
@@ -181,7 +181,7 @@ class _GenerateTabState extends State<GenerateTab> {
                 ),
               ),
               Container(
-                height: 200,
+                height: 150,
                 child: ListView.builder(
                   shrinkWrap: true,
                   itemCount: topList.length,
@@ -223,7 +223,7 @@ class _GenerateTabState extends State<GenerateTab> {
                 ),
               ),
               Container(
-                height: 200,
+                height: 150,
                 child: ListView.builder(
                   shrinkWrap: true,
                   itemCount: topList.length,
@@ -265,6 +265,49 @@ class _GenerateTabState extends State<GenerateTab> {
                   },
                 ),
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  
+                  Padding(
+                               padding: EdgeInsets.symmetric(horizontal: 10.0),
+                               child: Container(
+                                 width: 40,
+                                 height: 40,
+                                 decoration: BoxDecoration(
+                                   shape: BoxShape.circle,
+                                   color: Color(0xFFE7A757),
+                                 ),
+                                 child: IconButton(
+                                   icon: Icon(
+                                     Icons.swap_horiz,
+                                     color: Colors.white,
+                                   ),
+                                   onPressed: () {},
+                                 ),
+                               ),
+                         ),
+                         Padding(
+                           padding: EdgeInsets.symmetric(horizontal: 10.0),
+                           child: Container(
+                             width: 40,
+                             height: 40,
+                             decoration: BoxDecoration(
+                               shape: BoxShape.circle,
+                               color: Color(0xFFE7A757),
+                             ),
+                             child: IconButton(
+                               icon: Icon(
+                                 Icons.add,
+                                 color: Colors.white,
+                               ),
+                               onPressed: () {},
+                             ),
+                           ),
+                         ),
+                ],
+              ),
+                   
               // Expanded(
               //   child: Column(
               //     mainAxisAlignment: MainAxisAlignment.center,
