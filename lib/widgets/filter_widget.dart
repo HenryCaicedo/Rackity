@@ -10,8 +10,6 @@ class FilterWidget extends StatefulWidget {
 }
 
 class FilterWidgetState extends State<FilterWidget> {
-  static String selectedGarmentType = 'Top';
-
   List<String> garmentTags = [
     "Dresses",
     "Outerwear",
@@ -99,9 +97,6 @@ class FilterWidgetState extends State<FilterWidget> {
                         ElevatedButton(
                           onPressed: () {
                             Navigator.pop(context);
-                            setState(() {
-                              filter = true;
-                            });
                           },
                           child: Text('Ok'),
                         ),

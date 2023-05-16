@@ -17,6 +17,7 @@ class ClosetTabState extends State<ClosetTab> {
   @override
   void initState() {
     //Comenta la siguiente linea para quitar el error:
+
     createClothes();
     // fil.FilterWidgetState.filter = false;
     super.initState();
@@ -128,6 +129,14 @@ class ClosetTabState extends State<ClosetTab> {
                                         ElevatedButton(
                                           onPressed: () {
                                             // Apply button logic here
+                                            if (fil.FilterWidgetState
+                                                    .selectedTags ==
+                                                []) {
+                                            } else {
+                                              fil.FilterWidgetState.filter =
+                                                  true;
+                                              createClothes();
+                                            }
                                           },
                                           child: Text('Aplicar'),
                                         ),
@@ -137,6 +146,9 @@ class ClosetTabState extends State<ClosetTab> {
                                         ElevatedButton(
                                           onPressed: () {
                                             // Remove filter button logic here
+                                            fil.FilterWidgetState.filter =
+                                                false;
+                                            createClothes();
                                           },
                                           child: Text('Quitar filtro'),
                                         ),
