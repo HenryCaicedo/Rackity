@@ -106,7 +106,8 @@ class _GenerateTabState extends State<GenerateTab> {
                             image: topList[_selectedIndex2].paintI),
                         shoes: Garment(
                             id: topList[_selectedIndex3].idSh,
-                            image: topList[_selectedIndex3].shoesI));
+                            image: topList[_selectedIndex3].shoesI),
+                            date: DateTime.now());
                     addManual(manualOutfit!);
                   },
                   child: Text(
