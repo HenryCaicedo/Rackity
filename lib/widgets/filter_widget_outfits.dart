@@ -96,9 +96,6 @@ class FilterWidgetOutfitsState extends State<FilterWidgetOutfits> {
                         ElevatedButton(
                           onPressed: () {
                             Navigator.pop(context);
-                            setState(() {
-                              filter = true;
-                            });
                           },
                           child: Text('Ok'),
                         ),
