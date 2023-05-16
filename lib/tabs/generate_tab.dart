@@ -14,14 +14,15 @@ class GenerateTab extends StatefulWidget {
 class _GenerateTabState extends State<GenerateTab> {
   int _selectedIndex3 = 0;
   int _selectedIndex2 = 0;
-
   int _selectedIndex1 = 0;
+  Outfit? manualOutfit;
 
   _onSelected(int index) {
     setState(() => _selectedIndex3 = index);
   }
 
-  List tophtllist = [];
+  List topList = [];
+
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   @override
@@ -33,8 +34,11 @@ class _GenerateTabState extends State<GenerateTab> {
           shirtI: e.image,
           paintI: e.image,
           shoesI: e.image,
+          idS: e.id,
+          idP: e.id,
+          idSh: e.id,
         ));
-    tophtllist.addAll(a);
+    topList.addAll(a);
   }
 
   @override
@@ -93,6 +97,17 @@ class _GenerateTabState extends State<GenerateTab> {
                 ElevatedButton(
                   onPressed: () {
                     // Code to be executed when the 'Manual' button is pressed
+                    manualOutfit = Outfit(
+                        top: Garment(
+                            id: topList[_selectedIndex1].idS,
+                            image: topList[_selectedIndex1].shirtI),
+                        bottom: Garment(
+                            id: topList[_selectedIndex2].idP,
+                            image: topList[_selectedIndex2].paintI),
+                        shoes: Garment(
+                            id: topList[_selectedIndex3].idSh,
+                            image: topList[_selectedIndex3].shoesI));
+                    addManual(manualOutfit!);
                   },
                   child: Text(
                     'Manual',
@@ -120,7 +135,7 @@ class _GenerateTabState extends State<GenerateTab> {
             height: 200,
             child: ListView.builder(
               shrinkWrap: true,
-              itemCount: tophtllist.length,
+              itemCount: topList.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
                 return InkWell(
@@ -132,9 +147,9 @@ class _GenerateTabState extends State<GenerateTab> {
                   child: Container(
                     width: side,
                     height: side,
-                    child: tophtllist[index].shirt == null
-                        ? Image(image: tophtllist[index].shirtI)
-                        : Image.network(tophtllist[index].shirt.toString()),
+                    child: topList[index].shirt == null
+                        ? Image(image: topList[index].shirtI)
+                        : Image.network(topList[index].shirt.toString()),
                     margin: EdgeInsets.only(
                         left: 10, right: 10, top: 30, bottom: 10),
                     decoration: BoxDecoration(
@@ -165,7 +180,7 @@ class _GenerateTabState extends State<GenerateTab> {
             height: 200,
             child: ListView.builder(
               shrinkWrap: true,
-              itemCount: tophtllist.length,
+              itemCount: topList.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
                 return InkWell(
@@ -175,9 +190,9 @@ class _GenerateTabState extends State<GenerateTab> {
                     });
                   },
                   child: Container(
-                    child: tophtllist[index].paint == null
-                        ? Image(image: tophtllist[index].paintI)
-                        : Image.network(tophtllist[index].paint.toString()),
+                    child: topList[index].paint == null
+                        ? Image(image: topList[index].paintI)
+                        : Image.network(topList[index].paint.toString()),
                     // child: Image.asset(Images[index].toString()),
                     width: side,
                     height: side,
@@ -207,7 +222,7 @@ class _GenerateTabState extends State<GenerateTab> {
             height: 200,
             child: ListView.builder(
               shrinkWrap: true,
-              itemCount: tophtllist.length,
+              itemCount: topList.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
                 return InkWell(
@@ -217,9 +232,9 @@ class _GenerateTabState extends State<GenerateTab> {
                     });
                   },
                   child: Container(
-                    child: tophtllist[index].shoes == null
-                        ? Image(image: tophtllist[index].shoesI)
-                        : Image.network(tophtllist[index].shoes.toString()),
+                    child: topList[index].shoes == null
+                        ? Image(image: topList[index].shoesI)
+                        : Image.network(topList[index].shoes.toString()),
                     // child: Image.asset(Images[index].toString()),
                     width: side,
                     height: side,
