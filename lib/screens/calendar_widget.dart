@@ -44,11 +44,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
   Widget build(BuildContext context) {
     final clothesToShow = outfits.where((outfit) => isSameDay(outfit.date, selectedDate)).toList();
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Calendar View'),
-      ),
-      body: Column(
+    return Column(
         children: [
           // Scrollable list of dates
           Center(
@@ -92,8 +88,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
             ),
           ),
         ],
-      ),
-    );
+      );
   }
 
   Widget clothesGroup(Outfit outfit) {

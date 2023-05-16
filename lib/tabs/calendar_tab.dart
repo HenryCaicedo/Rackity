@@ -210,12 +210,7 @@ final Stream<QuerySnapshot> _usersStream =
       ),
     );
 
-    return CalendarScreen(/*compiList: clothes.map((e) => CompareModel(
-                            shirtI: e.image,
-                            paintI: e.image,
-                            shoesI: e.image,
-                            date: DateTime.now(),
-                          )).toList()*/);/*Scaffold(
+    return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       body: SafeArea(
         child: Column(
@@ -223,10 +218,10 @@ final Stream<QuerySnapshot> _usersStream =
             Container(
               decoration:
                   BoxDecoration(color: Theme.of(context).colorScheme.primary),
-              padding: EdgeInsets.only(
+              padding: const EdgeInsets.only(
                   left: 16.0, top: 32.0, right: 24.0, bottom: 16),
               alignment: Alignment.centerLeft,
-              child: Text(
+              child: const Text(
                 'Calendario',
                 style: TextStyle(
                   fontSize: 36.0,
@@ -248,29 +243,10 @@ final Stream<QuerySnapshot> _usersStream =
                           topRight: Radius.circular(40.0),
                         ),
                       ),
-                      child: Column(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Colors.transparent,
-                            ),
-                            padding: EdgeInsets.only(
-                                left: 26.0, top: 0.0, right: 24.0, bottom: 0),
-                            alignment: Alignment.centerLeft,
-                          ),
-                          CalendarScreen(compiList: clothes.map((e) => CompareModel(
-                            shirtI: e.image,
-                            paintI: e.image,
-                            shoesI: e.image,
-                            date: DateTime.now(),
-                          )).toList()),
-                          //tarjetas,
-                        ],
-                      ))),
-            )
+                      child: const CalendarScreen(),)))
           ],
         ),
       ),
-    );*/
+    );
   }
 }
