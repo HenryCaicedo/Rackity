@@ -166,7 +166,7 @@ class _GenerateTabState extends State<GenerateTab> {
                         addManual(manualOutfit!);
                       },
                       child: Text(
-                        'Manual',
+                        'Guardar Manual',
                         style: TextStyle(
                           color: Color(
                               0xFF27584C), // Set the text color to #27584C
