@@ -1,16 +1,23 @@
-# rackity
+# Rackity
+Inventory management app. Control and classification of the availability of items in the user's closet, allowing 
+users to easily categorize and classify items in their closet, ensuring quick access and retrieval. 
 
-A new Flutter project.
+App developed in collaboration with graphic design students, who developed the idea and concept, as well as the graphical interface, which was then implemented by our team.
 
-## Getting Started
+![Rackity- Logo](https://github.com/HenryCaicedo/rackity/assets/72535346/905ddba0-48ad-436b-b3f6-2f8b69c791b0)
 
-This project is a starting point for a Flutter application.
+### Built with
+  - [Flutter](https://flutter.dev/)
 
-A few resources to get you started if this is your first Flutter project:
+## Authors (Programmers)
+ - Henry Caicedo - [HenryCaicedo](https://github.com/HenryCaicedo/)
+ - Jack Howard - [warwolf6432](https://github.com/warwolf6432)
+ - Gustavo Jimenez - [Zenemi44](https://github.com/Zenemi44)
+ - Juan Romero - [jjporto](https://github.com/jjporto)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Screenshots
+![login](https://github.com/HenryCaicedo/rackity/assets/72535346/b351b997-a3ac-4336-b152-6b041f1ac789)
+![item](https://github.com/HenryCaicedo/rackity/assets/72535346/27ea8712-2b7d-49f0-89e2-76d47548dafa)
+![outfit](https://github.com/HenryCaicedo/rackity/assets/72535346/2807615b-fc8d-4d6b-94ab-6ef9408df29c)
+![closet](https://github.com/HenryCaicedo/rackity/assets/72535346/5fb8a452-4df9-4ffc-a7ec-163ed8c259cf)
+![closet2](https://github.com/HenryCaicedo/rackity/assets/72535346/496e87e8-d625-497a-a201-f2af94790f63)
